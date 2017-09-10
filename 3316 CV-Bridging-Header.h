@@ -3,3 +3,4 @@
 //
 
 #import "DBugKit/Color/ColorFilter.h"
+#import "DBugKit/Vision/Detector.h"

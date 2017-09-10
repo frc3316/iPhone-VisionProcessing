@@ -6,7 +6,11 @@
 //  Copyright © 2017 Jonathan Ohayon. All rights reserved.
 //
 
-#import "Detector.h"
+// Imports
+#import <opencv2/opencv.hpp> // Main OpenCV lib
+#import <opencv2/imgcodecs/ios.h> // iOS OpenCV utility functions
+#import "Detector.h" // The declaration of the Detector class
+
 
 @implementation Detector
 

@@ -25,6 +25,8 @@
 		A58029B71F3FBF49002EA94A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58029B61F3FBF49002EA94A /* MenuViewController.swift */; };
 		A58029B91F3FC241002EA94A /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58029B81F3FC241002EA94A /* RoundButton.swift */; };
 		A58D8F441F50BCBE00758EC5 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58D8F431F50BCBE00758EC5 /* AssetsLibrary.framework */; };
+		A5DFF1611F652317008D3316 /* RectUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5DFF1601F652317008D3316 /* RectUtils.mm */; };
+		A5DFF1691F6554F1008D3316 /* CVUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5DFF1681F6554F1008D3316 /* CVUtils.mm */; };
 		A5F541F41F575D6F008B2754 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F541F31F575D6F008B2754 /* Constants.swift */; };
 		A5F541F71F5762E0008B2754 /* ColorUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5F541F51F5762E0008B2754 /* ColorUtils.mm */; };
 /* End PBXBuildFile section */
@@ -69,9 +71,13 @@
 		A58029B81F3FC241002EA94A /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		A58D8F431F50BCBE00758EC5 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		A58D8F451F50C12A00758EC5 /* 3316 CV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "3316 CV-Bridging-Header.h"; sourceTree = "<group>"; };
+		A5DFF15F1F652317008D3316 /* RectUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = RectUtils.h; sourceTree = "<group>"; };
+		A5DFF1601F652317008D3316 /* RectUtils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RectUtils.mm; sourceTree = "<group>"; };
+		A5DFF1671F6554F1008D3316 /* CVUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = CVUtils.h; sourceTree = "<group>"; };
+		A5DFF1681F6554F1008D3316 /* CVUtils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CVUtils.mm; sourceTree = "<group>"; };
 		A5F541F31F575D6F008B2754 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A5F541F51F5762E0008B2754 /* ColorUtils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ColorUtils.mm; sourceTree = "<group>"; };
-		A5F541F61F5762E0008B2754 /* ColorUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorUtils.h; sourceTree = "<group>"; };
+		A5F541F61F5762E0008B2754 /* ColorUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = ColorUtils.h; sourceTree = "<group>"; };
 		E731B96F49027F2D7F12CF48 /* Pods_3316_CV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3316_CV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F343069D0514AC623D1606C9 /* Pods-3316 CV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3316 CV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-3316 CV/Pods-3316 CV.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +159,10 @@
 			children = (
 				A5F541F61F5762E0008B2754 /* ColorUtils.h */,
 				A5F541F51F5762E0008B2754 /* ColorUtils.mm */,
+				A5DFF15F1F652317008D3316 /* RectUtils.h */,
+				A5DFF1601F652317008D3316 /* RectUtils.mm */,
+				A5DFF1671F6554F1008D3316 /* CVUtils.h */,
+				A5DFF1681F6554F1008D3316 /* CVUtils.mm */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -366,6 +376,7 @@
 				A57906321F51FD1A003E5900 /* ColorFilter.mm in Sources */,
 				A55F95D21F5B4E1200670A4A /* DBugColor.mm in Sources */,
 				A52D6B8A1F5ACF53009E2171 /* Types.swift in Sources */,
+				A5DFF1611F652317008D3316 /* RectUtils.mm in Sources */,
 				A55F95D61F5B513B00670A4A /* Detector.mm in Sources */,
 				A575F3D31F4782CB00C56B49 /* RectangleManager.swift in Sources */,
 				A58029B71F3FBF49002EA94A /* MenuViewController.swift in Sources */,
@@ -374,6 +385,7 @@
 				A547EFBF1F3F8529007C89BA /* CalibrateViewController.swift in Sources */,
 				A547EFCF1F3F85B0007C89BA /* CameraManager.swift in Sources */,
 				A547EFBD1F3F8529007C89BA /* AppDelegate.swift in Sources */,
+				A5DFF1691F6554F1008D3316 /* CVUtils.mm in Sources */,
 				A58029B11F3FA37C002EA94A /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

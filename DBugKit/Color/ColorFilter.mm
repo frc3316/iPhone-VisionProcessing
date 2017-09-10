@@ -8,9 +8,10 @@
 
 // Imports
 #import <opencv2/opencv.hpp> // Main OpenCV lib
-#import <opencv2/imgcodecs/ios.h>
-#import "ColorFilter.h" // The declaration of the Detector class
-#import "../Utilities/ColorUtils.h" // Utilities
+#import <opencv2/imgcodecs/ios.h> // iOS OpenCV utility functions
+#import "ColorFilter.h" // The declaration of the ColorFilter class
+#import "../Utilities/ColorUtils.h" // Color utilities
+#import "../Utilities/CVUtils.h" // CV utilities
 
 using namespace cv;
 

@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
+#import "../Utilities/RectUtils.h" // Rectangle utilities
 
 @interface Detector : NSObject
-// TODO - Implement!
+
+- (NSSet<DBugRect *> *) getBoundingRects;
+
 @end
