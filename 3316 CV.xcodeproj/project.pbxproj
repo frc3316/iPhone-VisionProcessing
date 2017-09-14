@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7958FD4AB7A8629257966961 /* Pods_3316_CV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E731B96F49027F2D7F12CF48 /* Pods_3316_CV.framework */; };
+		A52105E61F6A83DE00EF85CF /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52105E51F6A83DE00EF85CF /* Logger.swift */; };
 		A52D6B8A1F5ACF53009E2171 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D6B891F5ACF53009E2171 /* Types.swift */; };
 		A547EFBD1F3F8529007C89BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547EFBC1F3F8529007C89BA /* AppDelegate.swift */; };
 		A547EFBF1F3F8529007C89BA /* CalibrateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547EFBE1F3F8529007C89BA /* CalibrateViewController.swift */; };
@@ -15,20 +16,14 @@
 		A547EFC41F3F8529007C89BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A547EFC31F3F8529007C89BA /* Assets.xcassets */; };
 		A547EFC71F3F8529007C89BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A547EFC51F3F8529007C89BA /* LaunchScreen.storyboard */; };
 		A547EFCF1F3F85B0007C89BA /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547EFCE1F3F85B0007C89BA /* CameraManager.swift */; };
-		A55F95D21F5B4E1200670A4A /* DBugColor.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55F95D11F5B4E1200670A4A /* DBugColor.mm */; };
-		A55F95D61F5B513B00670A4A /* Detector.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55F95D51F5B513B00670A4A /* Detector.mm */; };
 		A575F3D31F4782CB00C56B49 /* RectangleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575F3D21F4782CB00C56B49 /* RectangleManager.swift */; };
 		A575F3D61F478A5600C56B49 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A575F3D51F478A5600C56B49 /* .swiftlint.yml */; };
-		A57906321F51FD1A003E5900 /* ColorFilter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A57906311F51FD1A003E5900 /* ColorFilter.mm */; };
 		A58029B11F3FA37C002EA94A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58029B01F3FA37C002EA94A /* Extensions.swift */; };
 		A58029B31F3FAA55002EA94A /* DetectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58029B21F3FAA55002EA94A /* DetectionManager.swift */; };
 		A58029B71F3FBF49002EA94A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58029B61F3FBF49002EA94A /* MenuViewController.swift */; };
 		A58029B91F3FC241002EA94A /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58029B81F3FC241002EA94A /* RoundButton.swift */; };
 		A58D8F441F50BCBE00758EC5 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58D8F431F50BCBE00758EC5 /* AssetsLibrary.framework */; };
-		A5DFF1611F652317008D3316 /* RectUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5DFF1601F652317008D3316 /* RectUtils.mm */; };
-		A5DFF1691F6554F1008D3316 /* CVUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5DFF1681F6554F1008D3316 /* CVUtils.mm */; };
 		A5F541F41F575D6F008B2754 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F541F31F575D6F008B2754 /* Constants.swift */; };
-		A5F541F71F5762E0008B2754 /* ColorUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5F541F51F5762E0008B2754 /* ColorUtils.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		5077F4E49F3AE09AB04A3316 /* Pods-3316 CV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3316 CV.release.xcconfig"; path = "Pods/Target Support Files/Pods-3316 CV/Pods-3316 CV.release.xcconfig"; sourceTree = "<group>"; };
+		A52105E51F6A83DE00EF85CF /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A52D6B891F5ACF53009E2171 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		A543533C1F50CEB8001CA91B /* libopencv_core.3.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.3.3.0.dylib; path = ../../../../../usr/local/Cellar/opencv/3.3.0_3/lib/libopencv_core.3.3.0.dylib; sourceTree = "<group>"; };
 		A543533E1F50CEEB001CA91B /* libopencv_imgproc.3.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.3.3.0.dylib; path = ../../../../../usr/local/Cellar/opencv/3.3.0_3/lib/libopencv_imgproc.3.3.0.dylib; sourceTree = "<group>"; };
@@ -57,27 +53,15 @@
 		A547EFC61F3F8529007C89BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A547EFC81F3F8529007C89BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A547EFCE1F3F85B0007C89BA /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
-		A55F95D01F5B4E1200670A4A /* DBugColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBugColor.h; sourceTree = "<group>"; };
-		A55F95D11F5B4E1200670A4A /* DBugColor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DBugColor.mm; sourceTree = "<group>"; };
-		A55F95D41F5B513B00670A4A /* Detector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Detector.h; sourceTree = "<group>"; };
-		A55F95D51F5B513B00670A4A /* Detector.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Detector.mm; sourceTree = "<group>"; };
 		A575F3D21F4782CB00C56B49 /* RectangleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleManager.swift; sourceTree = "<group>"; };
 		A575F3D51F478A5600C56B49 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
-		A57906301F51FD1A003E5900 /* ColorFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorFilter.h; sourceTree = "<group>"; };
-		A57906311F51FD1A003E5900 /* ColorFilter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ColorFilter.mm; sourceTree = "<group>"; };
 		A58029B01F3FA37C002EA94A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A58029B21F3FAA55002EA94A /* DetectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionManager.swift; sourceTree = "<group>"; };
 		A58029B61F3FBF49002EA94A /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		A58029B81F3FC241002EA94A /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		A58D8F431F50BCBE00758EC5 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		A58D8F451F50C12A00758EC5 /* 3316 CV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "3316 CV-Bridging-Header.h"; sourceTree = "<group>"; };
-		A5DFF15F1F652317008D3316 /* RectUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = RectUtils.h; sourceTree = "<group>"; };
-		A5DFF1601F652317008D3316 /* RectUtils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RectUtils.mm; sourceTree = "<group>"; };
-		A5DFF1671F6554F1008D3316 /* CVUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = CVUtils.h; sourceTree = "<group>"; };
-		A5DFF1681F6554F1008D3316 /* CVUtils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CVUtils.mm; sourceTree = "<group>"; };
 		A5F541F31F575D6F008B2754 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		A5F541F51F5762E0008B2754 /* ColorUtils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ColorUtils.mm; sourceTree = "<group>"; };
-		A5F541F61F5762E0008B2754 /* ColorUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = ColorUtils.h; sourceTree = "<group>"; };
 		E731B96F49027F2D7F12CF48 /* Pods_3316_CV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3316_CV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F343069D0514AC623D1606C9 /* Pods-3316 CV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3316 CV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-3316 CV/Pods-3316 CV.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				A58D8F451F50C12A00758EC5 /* 3316 CV-Bridging-Header.h */,
-				A58D8F3A1F50BA3800758EC5 /* DBugKit */,
 				A547EFBB1F3F8529007C89BA /* 3316 CV */,
 				A547EFBA1F3F8529007C89BA /* Products */,
 				A58D8F421F50BCBE00758EC5 /* Frameworks */,
@@ -130,6 +113,7 @@
 				A547EFBC1F3F8529007C89BA /* AppDelegate.swift */,
 				A5F541F31F575D6F008B2754 /* Constants.swift */,
 				A58029B01F3FA37C002EA94A /* Extensions.swift */,
+				A52105E51F6A83DE00EF85CF /* Logger.swift */,
 				A52D6B891F5ACF53009E2171 /* Types.swift */,
 				A58029B51F3FAA6B002EA94A /* Controllers */,
 				A58029BA1F3FC24B002EA94A /* Custom Views */,
@@ -141,37 +125,6 @@
 				A575F3D51F478A5600C56B49 /* .swiftlint.yml */,
 			);
 			path = "3316 CV";
-			sourceTree = "<group>";
-		};
-		A55F95CF1F5B4E0400670A4A /* Color */ = {
-			isa = PBXGroup;
-			children = (
-				A55F95D01F5B4E1200670A4A /* DBugColor.h */,
-				A55F95D11F5B4E1200670A4A /* DBugColor.mm */,
-				A57906301F51FD1A003E5900 /* ColorFilter.h */,
-				A57906311F51FD1A003E5900 /* ColorFilter.mm */,
-			);
-			path = Color;
-			sourceTree = "<group>";
-		};
-		A55F95D31F5B4EAC00670A4A /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				A5F541F61F5762E0008B2754 /* ColorUtils.h */,
-				A5F541F51F5762E0008B2754 /* ColorUtils.mm */,
-				A5DFF15F1F652317008D3316 /* RectUtils.h */,
-				A5DFF1601F652317008D3316 /* RectUtils.mm */,
-				A5DFF1671F6554F1008D3316 /* CVUtils.h */,
-				A5DFF1681F6554F1008D3316 /* CVUtils.mm */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
-		A57975BC1F50D41E004613B3 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		A58029B41F3FAA5E002EA94A /* Managers */ = {
@@ -201,17 +154,6 @@
 			path = "Custom Views";
 			sourceTree = "<group>";
 		};
-		A58D8F3A1F50BA3800758EC5 /* DBugKit */ = {
-			isa = PBXGroup;
-			children = (
-				A55F95D31F5B4EAC00670A4A /* Utilities */,
-				A55F95CF1F5B4E0400670A4A /* Color */,
-				A57975BC1F50D41E004613B3 /* Network */,
-				A5BF50161F50C99A00955DA4 /* Vision */,
-			);
-			path = DBugKit;
-			sourceTree = "<group>";
-		};
 		A58D8F421F50BCBE00758EC5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,15 +163,6 @@
 				E731B96F49027F2D7F12CF48 /* Pods_3316_CV.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A5BF50161F50C99A00955DA4 /* Vision */ = {
-			isa = PBXGroup;
-			children = (
-				A55F95D41F5B513B00670A4A /* Detector.h */,
-				A55F95D51F5B513B00670A4A /* Detector.mm */,
-			);
-			path = Vision;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,19 +306,14 @@
 			files = (
 				A58029B31F3FAA55002EA94A /* DetectionManager.swift in Sources */,
 				A5F541F41F575D6F008B2754 /* Constants.swift in Sources */,
-				A57906321F51FD1A003E5900 /* ColorFilter.mm in Sources */,
-				A55F95D21F5B4E1200670A4A /* DBugColor.mm in Sources */,
 				A52D6B8A1F5ACF53009E2171 /* Types.swift in Sources */,
-				A5DFF1611F652317008D3316 /* RectUtils.mm in Sources */,
-				A55F95D61F5B513B00670A4A /* Detector.mm in Sources */,
 				A575F3D31F4782CB00C56B49 /* RectangleManager.swift in Sources */,
+				A52105E61F6A83DE00EF85CF /* Logger.swift in Sources */,
 				A58029B71F3FBF49002EA94A /* MenuViewController.swift in Sources */,
 				A58029B91F3FC241002EA94A /* RoundButton.swift in Sources */,
-				A5F541F71F5762E0008B2754 /* ColorUtils.mm in Sources */,
 				A547EFBF1F3F8529007C89BA /* CalibrateViewController.swift in Sources */,
 				A547EFCF1F3F85B0007C89BA /* CameraManager.swift in Sources */,
 				A547EFBD1F3F8529007C89BA /* AppDelegate.swift in Sources */,
-				A5DFF1691F6554F1008D3316 /* CVUtils.mm in Sources */,
 				A58029B11F3FA37C002EA94A /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -536,7 +464,7 @@
 				INFOPLIST_FILE = "3316 CV/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jonathano.-316-CV";
+				PRODUCT_BUNDLE_IDENTIFIER = com.team3316.DBugVision;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "3316 CV-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -562,7 +490,7 @@
 				INFOPLIST_FILE = "3316 CV/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jonathano.-316-CV";
+				PRODUCT_BUNDLE_IDENTIFIER = com.team3316.DBugVision;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "3316 CV-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

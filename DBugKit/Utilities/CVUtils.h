@@ -17,4 +17,5 @@ using namespace std;
 Mat sampleToMat (CMSampleBufferRef sample);
 Mat maskFrame (Mat frame, Scalar lowerBound, Scalar upperBound);
 Mat thresholdFrame (Mat maskedFrame, double thresh);
+DBugPoint *dbugPointFromPoint (cv::Point point);
 DBugRect *rectFromPoints (vector<cv::Point> points);

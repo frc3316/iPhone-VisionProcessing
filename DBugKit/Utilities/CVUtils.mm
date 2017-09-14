@@ -40,3 +40,16 @@ Mat thresholdFrame (Mat maskedFrame, double thresh) {
   dilate(thresholded, thresholded, Mat());
   return thresholded;
 }
+
+DBugPoint *dbugPointFromPoint (cv::Point point) { return [[DBugPoint alloc] initWithX: point.x y: point.y]; }
+
+DBugRect *rectFromPoints (vector<cv::Point> points) {
+  DBugPoint *tl = dbugPointFromPoint(points[0]);
+  DBugPoint *tr = dbugPointFromPoint(points[1]);
+  DBugPoint *br = dbugPointFromPoint(points[2]);
+  DBugPoint *bl = dbugPointFromPoint(points[3]);
+  return [[DBugRect alloc] initWithTopLeft: tl
+                                  topRight: tr
+                               bottomRight: br
+                                bottomLeft: bl];
+}
