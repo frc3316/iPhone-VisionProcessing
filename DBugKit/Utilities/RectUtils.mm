@@ -65,8 +65,8 @@
   return self;
 }
 
-- (NSSet<DBugPoint *> *) getPointsArray {
-  NSSet<DBugPoint *> *set = [[NSSet alloc] initWithObjects: self.topLeft, self.topRight, self.bottomRight, self.bottomLeft, nil];
+- (NSArray<DBugPoint *> *) getPointsArray {
+  NSArray<DBugPoint *> *set = [[NSArray alloc] initWithObjects: self.topLeft, self.topRight, self.bottomRight, self.bottomLeft, nil];
   return set;
 }
 

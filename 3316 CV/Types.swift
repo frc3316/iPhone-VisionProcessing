@@ -17,10 +17,14 @@ typealias Calibration = (
 )
 typealias Tracker = (start: () -> Void, stop: () -> Void)
 
+//! Camera exposure tuple
+typealias Exposure = (
+  duration: Int32,
+  iso: Float
+)
+
+//! Camera settings tuple
 typealias CameraSettings = (
-  brightness: Double,
-  saturation: Double,
-  exposure: Double,
-  contrast: Double,
+  exposure: Exposure,
   flash: Bool
 )

@@ -14,8 +14,17 @@
 using namespace cv;
 using namespace std;
 
+using PolygonArray = vector<vector<cv::Point>>;
+
+// Matrix manipulations
 Mat sampleToMat (CMSampleBufferRef sample);
 Mat maskFrame (Mat frame, Scalar lowerBound, Scalar upperBound);
 Mat thresholdFrame (Mat maskedFrame, double thresh);
+
+// Type handling
 DBugPoint *dbugPointFromPoint (cv::Point point);
 DBugRect *rectFromPoints (vector<cv::Point> points);
+
+// Contours
+PolygonArray filterContours (PolygonArray contours);
+NSMutableArray<DBugRect *> *mapContours (PolygonArray contours);

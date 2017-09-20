@@ -8,4 +8,8 @@
 
 #include "ColorUtils.h"
 
-Scalar colorToScalar (DBugColor *c) { return Scalar(c.h, c.s, c.v); }
+Scalar colorToScalar (DBugColor *c) {
+//  double mod = HSV_MODIFIER * 255.0;
+//  double v = c.v - mod < 0 ? 0 : c.v - mod;
+  return Scalar(c.h, c.s, c.v);
+}

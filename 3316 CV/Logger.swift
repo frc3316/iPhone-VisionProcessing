@@ -18,19 +18,19 @@ class Log {
     return date.timeIntervalSince1970
   }
 
-  static func i (_ message: String) {
+  static func i (_ message: Any) {
     print("[\(Log.time())][\(Log.tag)][INFO] \(message)")
   }
 
-  static func d (_ message: String) {
+  static func d (_ message: Any) {
     print("[\(Log.time())][\(Log.tag)][DEBUG] \(message)")
   }
 
-  static func w (_ message: String) {
+  static func w (_ message: Any) {
     print("[\(Log.time())][\(Log.tag)][WARN] \(message)")
   }
 
-  static func e (_ message: String) {
+  static func e (_ message: Any) {
     print("[\(Log.time())][\(Log.tag)][ERROR] \(message)")
   }
 }

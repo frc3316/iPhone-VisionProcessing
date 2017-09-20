@@ -28,4 +28,8 @@
                                 alpha: 1.0];
 }
 
+- (void) transformValueWithModifier: (double) modifier {
+  self.v = self.v - modifier < 0.0 ? 0.0 : self.v - modifier;
+}
+
 @end

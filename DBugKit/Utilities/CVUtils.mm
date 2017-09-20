@@ -6,6 +6,7 @@
 //  Copyright © 2017 Jonathan Ohayon. All rights reserved.
 //
 
+#import "VisionConstants.h"
 #import "CVUtils.h"
 
 // Since iOS 11, the AVFoundation delegate for live camera feedback returns
@@ -37,7 +38,7 @@ Mat maskFrame (Mat frame, Scalar lowerBound, Scalar upperBound) {
 Mat thresholdFrame (Mat maskedFrame, double thresh) {
   Mat thresholded;
   threshold(maskedFrame, thresholded, thresh, 255, CV_THRESH_BINARY);
-  dilate(thresholded, thresholded, Mat());
+  erode(thresholded, thresholded, Mat());
   return thresholded;
 }
 
@@ -52,4 +53,28 @@ DBugRect *rectFromPoints (vector<cv::Point> points) {
                                   topRight: tr
                                bottomRight: br
                                 bottomLeft: bl];
+}
+
+// Filter contours by polygon vertex count, area range and ratio range
+PolygonArray filterContours (PolygonArray contours) {
+//  PolygonArray filtered(contours.size());
+//  copy_if(contours.begin(), contours.end(), filtered, [](vector<cv::Point> polygon) {
+//    cv::Rect boundRect = boundingRect(polygon);
+//    int area = boundRect.area(), ratio = boundRect.height / boundRect.width;
+//    bool isInAreaRange = area > MIN_BOUND_RECT_AREA && area < MAX_BOUND_RECT_AREA;
+//    bool isInRatioRange = ratio > MIN_HIGHT_WIDTH_RATIO && ratio < MAX_HIGHT_WIDTH_RATIO;
+//    if (!isInAreaRange) NSLog(@"Rect with area %d denied because of area range.", area);
+//    if (!isInRatioRange) NSLog(@"Rect with w/h ratio %d denied because of range.", ratio);
+//    return polygon.size() == 4 && isInAreaRange && isInRatioRange;
+//  });
+  return contours;
+}
+
+NSMutableArray<DBugRect *> *mapContours (PolygonArray contours) {
+  id transformed = [[NSMutableArray alloc] init];
+  for_each(contours.begin(), contours.end(), [&transformed] (vector<cv::Point> contour) {
+    DBugRect *rect = rectFromPoints(contour);
+    [transformed addObject: rect];
+  });
+  return transformed;
 }

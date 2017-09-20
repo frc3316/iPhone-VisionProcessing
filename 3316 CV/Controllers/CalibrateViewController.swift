@@ -22,6 +22,8 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
     upperBoundColor: Constants.upperColorBound
   )
 
+  let detector: Detector = Detector()
+
   @IBOutlet weak var preview: UIImageView!
 
   override func viewDidLoad () {
@@ -32,13 +34,6 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
     let frame = self.view.frame
     self.rectManager.frame = frame
     self.view.layer.addSublayer(self.rectManager.render(in: frame))
-
-    self.detectionManager.calibration.start { points in
-      self.rectManager.emit(points: points, in: frame)
-      let layer = self.rectManager.render(in: frame)
-      self.view.layer.sublayers?.removeSubrange(1...)
-      self.view.layer.addSublayer(layer)
-    }
   }
 
   override func didReceiveMemoryWarning () {
@@ -48,9 +43,25 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
   func captureOutput(_ output: AVCaptureOutput,
                      didOutput sampleBuffer: CMSampleBuffer,
                      from connection: AVCaptureConnection) {
+    // TODO - Beautify this snippet
     let masked = self.colorFilter.filterColors(of: sampleBuffer)
+//    let boundingRects = self.detector.getBoundingRects(in: masked!) ?? []
+//    guard boundingRects.count > 0 else { Log.d("no rects"); return }
+//    let points = boundingRects[0].getPointsArray()
+//    let frame = self.view.frame
+//    self.rectManager.emit(points: points!, in: frame)
+//    let layer = self.rectManager.render(in: frame)
+//    self.view.layer.sublayers?.removeSubrange(1...)
+//    self.view.layer.addSublayer(layer)
     DispatchQueue.main.async {
       self.preview.image = masked
     }
+//    DispatchQueue.main.async {
+//      self.preview.image = UIImage(
+//        ciImage: CIImage(
+//          cvPixelBuffer: CMSampleBufferGetImageBuffer(sampleBuffer)!
+//        )
+//      )
+//    }
   }
 }

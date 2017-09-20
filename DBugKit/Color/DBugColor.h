@@ -18,5 +18,6 @@
         saturation: (double) s
              value: (double) v;
 - (UIColor *) UIColor;
+- (void) transformValueWithModifier: (double) modifier;
 
 @end

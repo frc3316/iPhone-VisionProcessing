@@ -6,12 +6,18 @@
 //  Copyright © 2017 Jonathan Ohayon. All rights reserved.
 //
 
+// Frameworks
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import <UIKit/UIKit.h>
+
+#import "../Color/ColorFilter.h" // ColorFilter def
 #import "../Utilities/RectUtils.h" // Rectangle utilities
 
 @interface Detector : NSObject
 
-- (NSSet<DBugRect *> *) getBoundingRects;
+@property (nonatomic, assign) ColorFilter *filter;
+
+- (NSArray<DBugRect *> *) getBoundingRectsInImage: (UIImage *) image;
 
 @end

@@ -37,7 +37,7 @@
               topRight: (DBugPoint *) tr
            bottomRight: (DBugPoint *) br
             bottomLeft: (DBugPoint *) bl;
-- (NSSet<DBugPoint *> *) getPointsArray;
+- (NSArray<DBugPoint *> *) getPointsArray;
 - (DBugPoint *) getCenteroid;
 - (CGRect) CGRect;
 

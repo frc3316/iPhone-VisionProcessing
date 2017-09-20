@@ -80,7 +80,11 @@ class CameraManager {
   internal static func prepareCamera (camera: AVCaptureDevice, settings: CameraSettings) {
     try? camera.lockForConfiguration()
     if settings.flash { try? camera.setTorchModeOn(level: 1.0) }
-    // TODO - Implement brightness, saturation, exposure and contrast controls
+    camera.setExposureModeCustom(
+      duration: CMTimeMake(1, settings.exposure.duration),
+      iso: settings.exposure.iso,
+      completionHandler: nil
+    )
     camera.unlockForConfiguration()
   }
 }

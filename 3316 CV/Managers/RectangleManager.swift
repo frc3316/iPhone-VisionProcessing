@@ -83,8 +83,8 @@ class RectangleManager {
    * Changes the internal state's points array to be a new one.
    * - parameter points: The new points array
    */
-  func emit (points: [CGPoint], in frame: CGRect) {
-    self.points = points.map({ self.transformPoint($0, in: frame) })
+  func emit (points: [DBugPoint], in frame: CGRect) {
+    self.points = points.map({ self.transformPoint($0.cgPoint(), in: frame) })
   }
 
   // MARK: Geometry functions
