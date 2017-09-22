@@ -21,6 +21,14 @@
   return self;
 }
 
+- (id) initWithUIColor: (UIColor *) color {
+  double h, s, v;
+  [color getHue:&h saturation:&s brightness:&v alpha:nil];
+  return [[DBugColor alloc] initWithHue: h * 255.0
+                             saturation: s * 255.0
+                                  value: v * 255.0];
+}
+
 - (UIColor *) UIColor {
   return [[UIColor alloc] initWithHue: self.h / 255.0
                            saturation: self.s / 255.0

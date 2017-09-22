@@ -43,25 +43,24 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
   func captureOutput(_ output: AVCaptureOutput,
                      didOutput sampleBuffer: CMSampleBuffer,
                      from connection: AVCaptureConnection) {
-    // TODO - Beautify this snippet
-    let masked = self.colorFilter.filterColors(of: sampleBuffer)
-//    let boundingRects = self.detector.getBoundingRects(in: masked!) ?? []
-//    guard boundingRects.count > 0 else { Log.d("no rects"); return }
-//    let points = boundingRects[0].getPointsArray()
-//    let frame = self.view.frame
-//    self.rectManager.emit(points: points!, in: frame)
-//    let layer = self.rectManager.render(in: frame)
-//    self.view.layer.sublayers?.removeSubrange(1...)
-//    self.view.layer.addSublayer(layer)
+    // 1. Draw the masked colors image to the screen
+    let masked = self.colorFilter.filterColors(of: sampleBuffer, isFlashOn: Constants.camera.flash)
     DispatchQueue.main.async {
       self.preview.image = masked
+      self.preview.layer.sublayers?.removeSubrange(0...)
     }
-//    DispatchQueue.main.async {
-//      self.preview.image = UIImage(
-//        ciImage: CIImage(
-//          cvPixelBuffer: CMSampleBufferGetImageBuffer(sampleBuffer)!
-//        )
-//      )
-//    }
+
+    // 2. Find the minimal bounding rectangles and get the biggest one's points array
+    let boundingRects = self.detector.getBoundingRects(in: masked!) ?? []
+    guard boundingRects.count > 0 else { Log.d("No rects found"); return }
+    let points = boundingRects[0].getPointsArray()
+
+    // 3. Draw them to the screen
+    DispatchQueue.main.async {
+      let frame = self.preview.frame
+      self.rectManager.emit(points: points!, in: frame)
+      let layer = self.rectManager.render(in: frame)
+      self.preview.layer.addSublayer(layer)
+    }
   }
 }

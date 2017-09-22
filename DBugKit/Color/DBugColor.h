@@ -17,6 +17,7 @@
 - (id) initWithHue: (double) h
         saturation: (double) s
              value: (double) v;
+- (id) initWithUIColor: (UIColor *) color;
 - (UIColor *) UIColor;
 - (void) transformValueWithModifier: (double) modifier;
 

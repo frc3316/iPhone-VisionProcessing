@@ -13,9 +13,9 @@ import CFNetwork
 class Log {
   static var tag: String = "VISION"
 
-  internal static func time () -> Double {
+  internal static func time () -> Int {
     let date = Date()
-    return date.timeIntervalSince1970
+    return Int(date.timeIntervalSince1970 * 100 * 1000)
   }
 
   static func i (_ message: Any) {

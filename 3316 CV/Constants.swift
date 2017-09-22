@@ -22,4 +22,8 @@ struct Constants {
     ),
     flash: false
   )
+
+  // Rectangle manager settings
+  static let scaleFactor: CGFloat = 0.53
+  static let pointLayerWidth = 10
 }

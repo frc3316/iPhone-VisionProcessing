@@ -7,7 +7,7 @@
 //
 
 #import "VisionConstants.h"
-#import "CVUtils.h"
+#import "Utilities.h"
 
 // Since iOS 11, the AVFoundation delegate for live camera feedback returns
 // a CMSampleBuffer instead of an actual image. OpenCV was not able to use
@@ -35,46 +35,59 @@ Mat maskFrame (Mat frame, Scalar lowerBound, Scalar upperBound) {
   return ranged;
 }
 
-Mat thresholdFrame (Mat maskedFrame, double thresh) {
+Mat thresholdFrame (Mat maskedFrame, double thresh, bool hasFlash) {
   Mat thresholded;
   threshold(maskedFrame, thresholded, thresh, 255, CV_THRESH_BINARY);
   erode(thresholded, thresholded, Mat());
+  // If the flash is turned on, we should erode the image another time to get rid of the small reflections
+  if (hasFlash) erode(thresholded, thresholded, Mat());
   return thresholded;
 }
 
-DBugPoint *dbugPointFromPoint (cv::Point point) { return [[DBugPoint alloc] initWithX: point.x y: point.y]; }
+DBugPoint *dbugPointFromPoint (Point2f point) { return [[DBugPoint alloc] initWithX: point.x y: point.y]; }
 
-DBugRect *rectFromPoints (vector<cv::Point> points) {
-  DBugPoint *tl = dbugPointFromPoint(points[0]);
-  DBugPoint *tr = dbugPointFromPoint(points[1]);
-  DBugPoint *br = dbugPointFromPoint(points[2]);
-  DBugPoint *bl = dbugPointFromPoint(points[3]);
-  return [[DBugRect alloc] initWithTopLeft: tl
-                                  topRight: tr
-                               bottomRight: br
-                                bottomLeft: bl];
+DBugRect *rectFromPoints (Point2f tl, Point2f tr, Point2f br, Point2f bl) {
+  DBugPoint *tld = dbugPointFromPoint(tl);
+  DBugPoint *trd = dbugPointFromPoint(tr);
+  DBugPoint *brd = dbugPointFromPoint(br);
+  DBugPoint *bld = dbugPointFromPoint(bl);
+  return [[DBugRect alloc] initWithTopLeft: tld
+                                  topRight: trd
+                               bottomRight: brd
+                                bottomLeft: bld];
+}
+
+bool shouldFilterContour (int numOfPoints, double area, double ratio, Polygon convex) {
+  bool isInAreaRange = area >= MIN_CONTOUR_AREA && area <= MAX_CONTOUR_AREA;
+  bool isInRatioRange = ratio >= MIN_HEIGHT_WIDTH_RATIO && ratio <= MAX_HEIGHT_WIDTH_RATIO;
+  return isContourConvex(convex)
+    && isInAreaRange
+    && isInRatioRange
+    && numOfPoints >= 4;
 }
 
 // Filter contours by polygon vertex count, area range and ratio range
-PolygonArray filterContours (PolygonArray contours) {
-//  PolygonArray filtered(contours.size());
-//  copy_if(contours.begin(), contours.end(), filtered, [](vector<cv::Point> polygon) {
-//    cv::Rect boundRect = boundingRect(polygon);
-//    int area = boundRect.area(), ratio = boundRect.height / boundRect.width;
-//    bool isInAreaRange = area > MIN_BOUND_RECT_AREA && area < MAX_BOUND_RECT_AREA;
-//    bool isInRatioRange = ratio > MIN_HIGHT_WIDTH_RATIO && ratio < MAX_HIGHT_WIDTH_RATIO;
-//    if (!isInAreaRange) NSLog(@"Rect with area %d denied because of area range.", area);
-//    if (!isInRatioRange) NSLog(@"Rect with w/h ratio %d denied because of range.", ratio);
-//    return polygon.size() == 4 && isInAreaRange && isInRatioRange;
-//  });
-  return contours;
+vector<RotatedRect> filterContours (PolygonArray contours) {
+  vector<RotatedRect> filtered;
+  for_each(contours.begin(), contours.end(), [&filtered] (Polygon contour) {
+    Polygon convex;
+    convexHull(contour, convex);
+    RotatedRect rect = minAreaRect(convex);
+    bool shouldFilter = shouldFilterContour((int) convex.size(), // Convex hull number of points
+                                            contourArea(convex) / 100.0, // Convex hull area
+                                            rect.boundingRect2f().height / rect.boundingRect2f().width, // Bounding rectangle height-width ratio
+                                            convex); // The convex hull itself
+    if (shouldFilter) filtered.push_back(rect);
+  });
+  return filtered;
 }
 
-NSMutableArray<DBugRect *> *mapContours (PolygonArray contours) {
+NSMutableArray<DBugRect *> *mapContours (vector<RotatedRect> rects) {
   id transformed = [[NSMutableArray alloc] init];
-  for_each(contours.begin(), contours.end(), [&transformed] (vector<cv::Point> contour) {
-    DBugRect *rect = rectFromPoints(contour);
-    [transformed addObject: rect];
+  for_each(rects.begin(), rects.end(), [&transformed] (RotatedRect rect) {
+    Point2f vtx[4]; rect.points(vtx);
+    DBugRect *rectd = rectFromPoints(vtx[3], vtx[2], vtx[1], vtx[0]);
+    [transformed addObject:rectd];
   });
   return transformed;
 }

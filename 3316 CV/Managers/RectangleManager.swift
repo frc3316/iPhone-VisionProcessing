@@ -95,15 +95,18 @@ class RectangleManager {
     let averageX = points.map({ $0.x }).reduce(1, +) / 4
     let averageY = points.map({ $0.y }).reduce(1, +) / 4
 
-    return CGPoint(x: averageX - 2.5, y: averageY - 2.5)
+    let d = CGFloat(Constants.pointLayerWidth / 2)
+    return CGPoint(x: averageX - d, y: averageY - d)
   }
 
   // MARK: Internal functions
 
   internal func getPointLayer (for point: CGPoint, colored: UIColor) -> CALayer {
     let layer = CALayer()
-    let translation = CGAffineTransform(translationX: -5, y: -5)
-    layer.frame = CGRect(origin: point.applying(translation), size: CGSize(width: 10, height: 10))
+    let d = CGFloat(Constants.pointLayerWidth / 2)
+    let translation = CGAffineTransform(translationX: -d, y: -d)
+    let size = CGSize(width: Constants.pointLayerWidth, height: Constants.pointLayerWidth)
+    layer.frame = CGRect(origin: point.applying(translation), size: size)
     layer.backgroundColor = colored.cgColor
     return layer
   }
@@ -123,10 +126,7 @@ class RectangleManager {
    * - parameter point: The point to trasnform
    */
   internal func transformPoint (_ point: CGPoint, in rect: CGRect) -> CGPoint {
-    let width = rect.width
-    let height = rect.height
-    let scale = CGAffineTransform(scaleX: width, y: height)
-    let newPoint = CGPoint(x: point.x, y: 1 - point.y)
-    return newPoint.applying(scale)
+    let scale = CGAffineTransform(scaleX: Constants.scaleFactor, y: Constants.scaleFactor)
+    return point.applying(scale)
   }
 }

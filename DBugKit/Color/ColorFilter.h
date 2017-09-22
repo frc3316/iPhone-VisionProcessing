@@ -18,6 +18,6 @@
 // Instance methods
 - (id) initWithLowerBoundColor: (DBugColor *) lowerBound
                upperBoundColor: (DBugColor *) upperBound;
-- (UIImage *) filterColorsOfBuffer: (CMSampleBufferRef) buffer;
+- (UIImage *) filterColorsOfBuffer: (CMSampleBufferRef) buffer isFlashOn: (bool) isFlashOn;
 
 @end
