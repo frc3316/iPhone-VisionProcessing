@@ -23,7 +23,10 @@ struct Constants {
     flash: false
   )
 
+  // Taken from https://goo.gl/Nq92tY
+  static let iphone7FOV = 59.680
+
   // Rectangle manager settings
-  static let scaleFactor: CGFloat = 0.53
+  static let scaleFactor = 0.53
   static let pointLayerWidth = 10
 }

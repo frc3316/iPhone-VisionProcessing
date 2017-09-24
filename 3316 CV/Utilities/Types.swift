@@ -7,15 +7,6 @@
 //
 
 import UIKit
-import Vision
-
-typealias DetectionHandler = ([CGPoint]) -> Void
-typealias Calibration = (
-  start: (@escaping DetectionHandler) -> Void,
-  stop: () -> Void,
-  observation: VNRectangleObservation?
-)
-typealias Tracker = (start: () -> Void, stop: () -> Void)
 
 //! Camera exposure tuple
 typealias Exposure = (
@@ -27,4 +18,15 @@ typealias Exposure = (
 typealias CameraSettings = (
   exposure: Exposure,
   flash: Bool
+)
+
+//! Centroid info tuple
+typealias Centroid = (
+  distance: Double,
+  angle: Double
+)
+
+typealias Measures = (
+  width: Double,
+  height: Double
 )

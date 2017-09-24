@@ -10,7 +10,7 @@ import UIKit
 
 class RectangleManager {
   // Internal instance members
-  internal var points: [CGPoint]?
+  internal var rect: DBugRect?
 
   // Set the fill color for the shape layer
   var fillColor: UIColor = UIColor.clear
@@ -31,8 +31,8 @@ class RectangleManager {
    * The RectangleManager constructor.
    * - parameter points: The initial points array of the rectangle.
    */
-  init (points: [CGPoint]? = nil) {
-    self.points = points
+  init (rect: DBugRect? = nil) {
+    self.rect = rect
   }
 
   // MARK: View helpers
@@ -45,34 +45,37 @@ class RectangleManager {
     let shape = self.getShapeLayer(for: frame)
 
     // If the points array == nil (aka first run), return the default shape
-    guard let points = self.points else { return shape }
+    guard let rect = self.rect else { return shape }
 
-    // Make sure we have actual points
-    guard points.count > 0 else { return CAShapeLayer() }
+    // Get CGPoints of DBugPoints
+    let topLeft = rect.topLeft.cgPoint()
+    let topRight = rect.topRight.cgPoint()
+    let bottomRight = rect.bottomRight.cgPoint()
+    let bottomLeft = rect.bottomLeft.cgPoint()
 
     // If all good, continue to render the path on the layer
     let path = UIBezierPath()
-    path.move(to: points[0])
-    path.addLine(to: points[1])
-    path.addLine(to: points[2])
-    path.addLine(to: points[3])
+    path.move(to: topLeft)
+    path.addLine(to: topRight)
+    path.addLine(to: bottomRight)
+    path.addLine(to: bottomLeft)
     path.close()
     shape.path = path.cgPath
 
     // Render the center point of the polygon
-    let center = self.getCenter(of: points)
+    let center = rect.getCenteroid().cgPoint()
     let cl = self.getPointLayer(for: center, colored: UIColor.red)
     shape.addSublayer(cl)
 
     // Render the top left + bottom right in green
-    let tlpl = self.getPointLayer(for: points[0], colored: UIColor.green)
-    let brpl = self.getPointLayer(for: points[2], colored: UIColor.green)
+    let tlpl = self.getPointLayer(for: topLeft, colored: UIColor.green)
+    let brpl = self.getPointLayer(for: bottomRight, colored: UIColor.green)
     shape.addSublayer(tlpl)
     shape.addSublayer(brpl)
 
     // Render the top right + bottom left in blue
-    let trpl = self.getPointLayer(for: points[1], colored: UIColor.blue)
-    let blpl = self.getPointLayer(for: points[3], colored: UIColor.blue)
+    let trpl = self.getPointLayer(for: topRight, colored: UIColor.blue)
+    let blpl = self.getPointLayer(for: bottomLeft, colored: UIColor.blue)
     shape.addSublayer(trpl)
     shape.addSublayer(blpl)
 
@@ -83,24 +86,15 @@ class RectangleManager {
    * Changes the internal state's points array to be a new one.
    * - parameter points: The new points array
    */
-  func emit (points: [DBugPoint], in frame: CGRect) {
-    self.points = points.map({ self.transformPoint($0.cgPoint(), in: frame) })
-  }
-
-  // MARK: Geometry functions
-
-  internal func getCenter (of points: [CGPoint]?) -> CGPoint {
-    guard let points = points else { return CGPoint.zero }
-
-    let averageX = points.map({ $0.x }).reduce(1, +) / 4
-    let averageY = points.map({ $0.y }).reduce(1, +) / 4
-
-    let d = CGFloat(Constants.pointLayerWidth / 2)
-    return CGPoint(x: averageX - d, y: averageY - d)
+  func emit (rect: DBugRect, in frame: CGRect) {
+    self.rect = rect.scalePoints(withFactor: Constants.scaleFactor)
   }
 
   // MARK: Internal functions
 
+  /**
+   * Get a CALayer with a given color to mark a point on the screen
+   */
   internal func getPointLayer (for point: CGPoint, colored: UIColor) -> CALayer {
     let layer = CALayer()
     let d = CGFloat(Constants.pointLayerWidth / 2)
@@ -111,6 +105,9 @@ class RectangleManager {
     return layer
   }
 
+  /**
+   * Get a CAShapeLayer in a given frame
+   */
   internal func getShapeLayer (for frame: CGRect) -> CAShapeLayer {
     let shape = CAShapeLayer()
     shape.frame = frame
@@ -119,14 +116,5 @@ class RectangleManager {
     shape.lineCap = self.lineCap
     shape.lineJoin = self.lineJoin
     return shape
-  }
-
-  /**
-   * Transforms a given point's (x, y) values to actual visible ones.
-   * - parameter point: The point to trasnform
-   */
-  internal func transformPoint (_ point: CGPoint, in rect: CGRect) -> CGPoint {
-    let scale = CGAffineTransform(scaleX: Constants.scaleFactor, y: Constants.scaleFactor)
-    return point.applying(scale)
   }
 }

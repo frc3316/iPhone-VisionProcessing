@@ -19,8 +19,11 @@
                y: (double) y;
 - (void) transformDeltaX: (double) dx
                   deltaY: (double) dy;
+- (DBugPoint *) scaledWithX: (double) dx
+                          y: (double) dy;
 - (double) getDistanceFromPoint: (DBugPoint *) point;
 - (DBugPoint *) getCenterWithPointB: (DBugPoint *) point;
+
 - (CGPoint) CGPoint;
 
 @end
@@ -39,6 +42,7 @@
             bottomLeft: (DBugPoint *) bl;
 - (NSArray<DBugPoint *> *) getPointsArray;
 - (DBugPoint *) getCenteroid;
+- (DBugRect *) scalePointsWithFactor: (double) scaleFactor;
 - (CGRect) CGRect;
 
 @end

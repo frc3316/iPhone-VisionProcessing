@@ -26,6 +26,11 @@
   self.y += dy;
 }
 
+- (DBugPoint *) scaledWithX: (double) dx y: (double) dy {
+  return [[DBugPoint alloc] initWithX: self.x * dx
+                                    y: self.y * dy];
+}
+
 - (double) getDistanceFromPoint: (DBugPoint *) point {
   double dxs = exp2(self.x - point.x);
   double dys = exp2(self.y - point.y);
@@ -74,6 +79,17 @@
   DBugPoint *ct = [self.topLeft getCenterWithPointB: self.topRight];
   DBugPoint *cb = [self.bottomLeft getCenterWithPointB: self.bottomRight];
   return [ct getCenterWithPointB: cb];
+}
+
+- (DBugRect *) scalePointsWithFactor: (double) scaleFactor {
+  DBugPoint *tl = [self.topLeft scaledWithX:scaleFactor y:scaleFactor];
+  DBugPoint *br = [self.topLeft scaledWithX:scaleFactor y:scaleFactor];
+  DBugPoint *tr = [self.topLeft scaledWithX:scaleFactor y:scaleFactor];
+  DBugPoint *bl = [self.bottomLeft scaledWithX:scaleFactor y:scaleFactor];
+  return [[DBugRect alloc] initWithTopLeft: tl
+                                  topRight: tr
+                               bottomRight: br
+                                bottomLeft: bl];
 }
 
 - (CGRect) CGRect {

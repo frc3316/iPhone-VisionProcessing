@@ -47,6 +47,12 @@ Mat thresholdFrame (Mat maskedFrame, double thresh, bool hasFlash) {
 DBugPoint *dbugPointFromPoint (Point2f point) { return [[DBugPoint alloc] initWithX: point.x y: point.y]; }
 
 DBugRect *rectFromPoints (Point2f tl, Point2f tr, Point2f br, Point2f bl) {
+  NSLog(@"<rect>");
+  NSLog(@"tl -> (%f, %f)", tl.x, tl.y);
+  NSLog(@"tr -> (%f, %f)", tr.x, tr.y);
+  NSLog(@"br -> (%f, %f)", bl.x, bl.y);
+  NSLog(@"bl -> (%f, %f)", br.x, br.y);
+  NSLog(@"</rect>");
   DBugPoint *tld = dbugPointFromPoint(tl);
   DBugPoint *trd = dbugPointFromPoint(tr);
   DBugPoint *brd = dbugPointFromPoint(br);

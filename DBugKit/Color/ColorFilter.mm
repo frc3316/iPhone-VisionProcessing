@@ -19,7 +19,6 @@ using namespace cv;
 - (id) initWithLowerBoundColor: (DBugColor *) lowerBound
                upperBoundColor: (DBugColor *) upperBound {
   if (self = [super init]) {
-    [lowerBound transformValueWithModifier: HSV_MODIFIER];
     self.lowerBoundColor = lowerBound;
     self.upperBoundColor = upperBound;
   }

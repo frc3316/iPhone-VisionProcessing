@@ -12,7 +12,6 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
   override var shouldAutorotate: Bool { return false }
   override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .landscapeRight }
 
-  let detectionManager: DetectionManager = DetectionManager()
   let cameraManager: CameraManager = CameraManager(type: .video, settings: Constants.camera)
   let rectManager: RectangleManager = RectangleManager()
 
@@ -47,18 +46,17 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
     let masked = self.colorFilter.filterColors(of: sampleBuffer, isFlashOn: Constants.camera.flash)
     DispatchQueue.main.async {
       self.preview.image = masked
-      self.preview.layer.sublayers?.removeSubrange(0...)
+      self.preview.layer.sublayers?.removeAll()
     }
 
     // 2. Find the minimal bounding rectangles and get the biggest one's points array
     let boundingRects = self.detector.getBoundingRects(in: masked!) ?? []
     guard boundingRects.count > 0 else { Log.d("No rects found"); return }
-    let points = boundingRects[0].getPointsArray()
 
     // 3. Draw them to the screen
     DispatchQueue.main.async {
       let frame = self.preview.frame
-      self.rectManager.emit(points: points!, in: frame)
+      self.rectManager.emit(rect: boundingRects[0], in: frame)
       let layer = self.rectManager.render(in: frame)
       self.preview.layer.addSublayer(layer)
     }

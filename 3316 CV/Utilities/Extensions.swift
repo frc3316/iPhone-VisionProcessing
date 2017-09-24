@@ -9,6 +9,15 @@
 import CoreGraphics
 
 extension CGPoint {
+  var dbugPoint: DBugPoint {
+    get {
+      return DBugPoint(
+        x: Double(self.x),
+        y: Double(self.y)
+      )
+    }
+  }
+
   func isIn (rect: CGRect) -> Bool {
     let xInBounds = self.x > rect.minX && self.x < rect.maxX
     let yInBounds = self.y > rect.minY && self.y < rect.maxY
