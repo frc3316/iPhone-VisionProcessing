@@ -47,12 +47,6 @@ Mat thresholdFrame (Mat maskedFrame, double thresh, bool hasFlash) {
 DBugPoint *dbugPointFromPoint (Point2f point) { return [[DBugPoint alloc] initWithX: point.x y: point.y]; }
 
 DBugRect *rectFromPoints (Point2f tl, Point2f tr, Point2f br, Point2f bl) {
-  NSLog(@"<rect>");
-  NSLog(@"tl -> (%f, %f)", tl.x, tl.y);
-  NSLog(@"tr -> (%f, %f)", tr.x, tr.y);
-  NSLog(@"br -> (%f, %f)", bl.x, bl.y);
-  NSLog(@"bl -> (%f, %f)", br.x, br.y);
-  NSLog(@"</rect>");
   DBugPoint *tld = dbugPointFromPoint(tl);
   DBugPoint *trd = dbugPointFromPoint(tr);
   DBugPoint *brd = dbugPointFromPoint(br);
@@ -92,7 +86,7 @@ NSMutableArray<DBugRect *> *mapContours (vector<RotatedRect> rects) {
   id transformed = [[NSMutableArray alloc] init];
   for_each(rects.begin(), rects.end(), [&transformed] (RotatedRect rect) {
     Point2f vtx[4]; rect.points(vtx);
-    DBugRect *rectd = rectFromPoints(vtx[3], vtx[2], vtx[1], vtx[0]);
+    DBugRect *rectd = rectFromPoints(vtx[0], vtx[1], vtx[2], vtx[3]);
     [transformed addObject:rectd];
   });
   return transformed;

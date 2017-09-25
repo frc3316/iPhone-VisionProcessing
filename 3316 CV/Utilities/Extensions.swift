@@ -10,12 +10,10 @@ import CoreGraphics
 
 extension CGPoint {
   var dbugPoint: DBugPoint {
-    get {
-      return DBugPoint(
-        x: Double(self.x),
-        y: Double(self.y)
-      )
-    }
+    return DBugPoint(
+      x: Double(self.x),
+      y: Double(self.y)
+    )
   }
 
   func isIn (rect: CGRect) -> Bool {

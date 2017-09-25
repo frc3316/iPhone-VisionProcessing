@@ -56,6 +56,8 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
     // 3. Draw them to the screen
     DispatchQueue.main.async {
       let frame = self.preview.frame
+
+      // The first rectangle is the best match to our criteria
       self.rectManager.emit(rect: boundingRects[0], in: frame)
       let layer = self.rectManager.render(in: frame)
       self.preview.layer.addSublayer(layer)

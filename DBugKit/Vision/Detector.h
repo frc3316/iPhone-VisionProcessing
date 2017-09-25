@@ -16,8 +16,6 @@
 
 @interface Detector : NSObject
 
-@property (nonatomic, assign) ColorFilter *filter;
-
 - (NSArray<DBugRect *> *) getBoundingRectsInImage: (UIImage *) image;
 
 @end

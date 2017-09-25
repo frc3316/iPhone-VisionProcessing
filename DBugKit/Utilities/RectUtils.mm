@@ -31,13 +31,13 @@
                                     y: self.y * dy];
 }
 
-- (double) getDistanceFromPoint: (DBugPoint *) point {
+- (double) distanceFromPoint: (DBugPoint *) point {
   double dxs = exp2(self.x - point.x);
   double dys = exp2(self.y - point.y);
   return sqrt(dxs + dys);
 }
 
-- (DBugPoint *) getCenterWithPointB: (DBugPoint *) point {
+- (DBugPoint *) centerWithPointB: (DBugPoint *) point {
   double avgX = (self.x + point.x) / 2;
   double avgY = (self.y + point.y) / 2;
   return [[DBugPoint alloc] initWithX: avgX
@@ -76,15 +76,15 @@
 }
 
 - (DBugPoint *) getCenteroid {
-  DBugPoint *ct = [self.topLeft getCenterWithPointB: self.topRight];
-  DBugPoint *cb = [self.bottomLeft getCenterWithPointB: self.bottomRight];
-  return [ct getCenterWithPointB: cb];
+  DBugPoint *ct = [self.topLeft centerWithPointB: self.topRight];
+  DBugPoint *cb = [self.bottomLeft centerWithPointB: self.bottomRight];
+  return [ct centerWithPointB: cb];
 }
 
 - (DBugRect *) scalePointsWithFactor: (double) scaleFactor {
   DBugPoint *tl = [self.topLeft scaledWithX:scaleFactor y:scaleFactor];
-  DBugPoint *br = [self.topLeft scaledWithX:scaleFactor y:scaleFactor];
-  DBugPoint *tr = [self.topLeft scaledWithX:scaleFactor y:scaleFactor];
+  DBugPoint *tr = [self.topRight scaledWithX:scaleFactor y:scaleFactor];
+  DBugPoint *br = [self.bottomRight scaledWithX:scaleFactor y:scaleFactor];
   DBugPoint *bl = [self.bottomLeft scaledWithX:scaleFactor y:scaleFactor];
   return [[DBugRect alloc] initWithTopLeft: tl
                                   topRight: tr
@@ -93,8 +93,8 @@
 }
 
 - (CGRect) CGRect {
-  double width = [self.topLeft getDistanceFromPoint: self.topRight];
-  double height = [self.topLeft getDistanceFromPoint: self.bottomLeft];
+  double width = [self.topLeft distanceFromPoint: self.topRight];
+  double height = [self.topLeft distanceFromPoint: self.bottomLeft];
   CGRect r = CGRectMake(self.topLeft.x, self.topLeft.y, width, height);
   return r;
 }
