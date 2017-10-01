@@ -22,8 +22,9 @@ typealias CameraSettings = (
 
 //! Centroid info tuple
 typealias Centroid = (
-  distance: Double,
-  angle: Double
+  polar: Double,
+  azimuth: Double,
+  distance: Double
 )
 
 typealias Measures = (

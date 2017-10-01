@@ -29,4 +29,9 @@ struct Constants {
   // Rectangle manager settings
   static let scaleFactor = 0.53
   static let pointLayerWidth = 10
+
+  static let goalMeasures: Measures = (
+    width: 0,
+    height: 0
+  )
 }

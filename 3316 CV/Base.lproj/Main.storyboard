@@ -92,18 +92,38 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Azimuth Angle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyk-he-I4c">
+                                <rect key="frame" x="16" y="625.5" width="343" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Polar Angle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynf-EV-dfH">
+                                <rect key="frame" x="16" y="595.5" width="343" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ynf-EV-dfH" firstAttribute="leading" secondItem="Gfd-Cq-Pn6" secondAttribute="leading" constant="16" id="A19-9h-Uvt"/>
+                            <constraint firstItem="hyk-he-I4c" firstAttribute="top" secondItem="ynf-EV-dfH" secondAttribute="bottom" constant="8" id="CIo-y5-IRz"/>
                             <constraint firstItem="8DK-7B-gQE" firstAttribute="top" secondItem="eJi-eJ-xvO" secondAttribute="top" id="Je7-Ci-lIb"/>
+                            <constraint firstItem="hyk-he-I4c" firstAttribute="leading" secondItem="Gfd-Cq-Pn6" secondAttribute="leading" constant="16" id="LDc-We-Kjq"/>
+                            <constraint firstItem="Gfd-Cq-Pn6" firstAttribute="trailing" secondItem="ynf-EV-dfH" secondAttribute="trailing" constant="16" id="MFB-G9-Dvg"/>
+                            <constraint firstItem="Gfd-Cq-Pn6" firstAttribute="bottom" secondItem="hyk-he-I4c" secondAttribute="bottom" constant="20" id="Otl-7o-E1S"/>
                             <constraint firstItem="8DK-7B-gQE" firstAttribute="leading" secondItem="Gfd-Cq-Pn6" secondAttribute="leading" id="bUA-YV-hgh"/>
                             <constraint firstItem="8DK-7B-gQE" firstAttribute="trailing" secondItem="Gfd-Cq-Pn6" secondAttribute="trailing" id="ccJ-AA-vX6"/>
                             <constraint firstItem="8DK-7B-gQE" firstAttribute="bottom" secondItem="Gfd-Cq-Pn6" secondAttribute="bottom" id="fwk-XE-Wod"/>
+                            <constraint firstItem="Gfd-Cq-Pn6" firstAttribute="trailing" secondItem="hyk-he-I4c" secondAttribute="trailing" constant="16" id="sgn-AI-ZPn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Gfd-Cq-Pn6"/>
                     </view>
                     <connections>
+                        <outlet property="hAngleLabel" destination="ynf-EV-dfH" id="0e8-Ef-LN9"/>
                         <outlet property="preview" destination="8DK-7B-gQE" id="zSQ-OY-mkR"/>
+                        <outlet property="vAngleLabel" destination="hyk-he-I4c" id="IuP-pD-oZk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mrA-e9-cwR" userLabel="First Responder" sceneMemberID="firstResponder"/>

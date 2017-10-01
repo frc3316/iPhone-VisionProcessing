@@ -14,6 +14,7 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
 
   let cameraManager: CameraManager = CameraManager(type: .video, settings: Constants.camera)
   let rectManager: RectangleManager = RectangleManager()
+  let sizeManager: SizeManager = SizeManager(measures: Constants.goalMeasures)
 
   // Color filter
   let colorFilter: ColorFilter = ColorFilter(
@@ -24,7 +25,9 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
   let detector: Detector = Detector()
 
   @IBOutlet weak var preview: UIImageView!
-
+  @IBOutlet weak var vAngleLabel: UILabel!
+  @IBOutlet weak var hAngleLabel: UILabel!
+  
   override func viewDidLoad () {
     super.viewDidLoad()
 
@@ -57,8 +60,13 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
     DispatchQueue.main.async {
       let frame = self.preview.frame
 
+      // Get the distance and the angle from the rectangle
+      let centroid = self.sizeManager.distanceFrom(rect: boundingRects[0])
+      self.hAngleLabel.text = "Polar: \(centroid.polar)"
+      self.vAngleLabel.text = "Azimuth: \(centroid.azimuth)"
+
       // The first rectangle is the best match to our criteria
-      self.rectManager.emit(rect: boundingRects[0], in: frame)
+      self.rectManager.emit(rect: boundingRects[0])
       let layer = self.rectManager.render(in: frame)
       self.preview.layer.addSublayer(layer)
     }

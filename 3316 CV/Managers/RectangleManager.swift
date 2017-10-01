@@ -12,19 +12,19 @@ class RectangleManager {
   // Internal instance members
   internal var rect: DBugRect?
 
-  // Set the fill color for the shape layer
+  //! Sets the fill color for the shape layer
   var fillColor: UIColor = UIColor.clear
 
-  // Set the stroke color for the shape layer
+  //! Sets the stroke color for the shape layer
   var strokeColor: UIColor = UIColor.magenta
 
-  // Set the line join style for the shape layer
+  //! Sets the line join style for the shape layer
   var lineJoin: String = kCALineJoinMiter
 
-  // Set the line cap style for the shape layer
+  //! Sets the line cap style for the shape layer
   var lineCap: String = kCALineCapRound
 
-  // Set the frame of the shape layer
+  //! Sets the frame of the shape layer
   var frame: CGRect?
 
   /**
@@ -53,7 +53,7 @@ class RectangleManager {
     let bottomRight = rect.bottomRight.cgPoint()
     let bottomLeft = rect.bottomLeft.cgPoint()
 
-    // If all good, continue to render the path on the layer
+    // Render the path on the layer
     let path = UIBezierPath()
     path.move(to: topLeft)
     path.addLine(to: topRight)
@@ -62,7 +62,7 @@ class RectangleManager {
     path.close()
     shape.path = path.cgPath
 
-    // Render the center point of the polygon
+    // Render the centeroid of the polygon
     let center = rect.getCenteroid().cgPoint()
     let cl = self.getPointLayer(for: center, colored: UIColor.red)
     shape.addSublayer(cl)
@@ -86,7 +86,7 @@ class RectangleManager {
    * Changes the internal state's points array to be a new one.
    * - parameter points: The new points array
    */
-  func emit (rect: DBugRect, in frame: CGRect) {
+  func emit (rect: DBugRect) {
     self.rect = rect.scalePoints(withFactor: Constants.scaleFactor)
   }
 

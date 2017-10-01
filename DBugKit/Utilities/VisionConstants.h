@@ -9,8 +9,6 @@
 #include <stdio.h>
 
 //! DBugVision constants
-#define MIN_BOUND_RECT_AREA 550
-#define MAX_BOUND_RECT_AREA 4800
 #define MIN_CONTOUR_AREA 550
 #define MAX_CONTOUR_AREA 4800
 #define MIN_HEIGHT_WIDTH_RATIO 0
