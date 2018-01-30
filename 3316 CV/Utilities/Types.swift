@@ -24,7 +24,8 @@ typealias CameraSettings = (
 typealias Centroid = (
   polar: Double,
   azimuth: Double,
-  distance: Double
+  distance: Double,
+  isDetected: Bool
 )
 
 typealias Measures = (

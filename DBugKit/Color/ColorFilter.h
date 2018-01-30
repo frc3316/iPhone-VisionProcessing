@@ -12,8 +12,8 @@
 
 @interface ColorFilter : NSObject
 
-@property (assign) DBugColor *upperBoundColor;
-@property (assign) DBugColor *lowerBoundColor;
+@property (nonatomic, assign) DBugColor *upperBoundColor;
+@property (nonatomic, assign) DBugColor *lowerBoundColor;
 
 // Instance methods
 - (id) initWithLowerBoundColor: (DBugColor *) lowerBound

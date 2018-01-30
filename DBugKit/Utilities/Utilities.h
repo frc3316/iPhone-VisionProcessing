@@ -9,9 +9,10 @@
 #ifndef Utilities_h
 #define Utilities_h
 
-#import "VisionConstants.h"
+#import "Constants.h"
 #import "ColorUtils.h"
 #import "CVUtils.h"
 #import "RectUtils.h"
+#import "NewRectUtils.h"
 
 #endif /* Utilities_h */

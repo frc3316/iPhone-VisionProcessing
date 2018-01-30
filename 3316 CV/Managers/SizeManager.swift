@@ -16,28 +16,36 @@ class SizeManager {
     self.goalMeasures = measures
   }
 
-  func distanceFrom (rect: DBugRect) -> Centroid {
-    let centroid = rect.getCenteroid()!
-    let azimuth = self.calculateHorizontalAngle(from: centroid)
-    let polar = self.calculateVerticalAngle(from: centroid)
+  func distanceFrom (rect: Rectangle) -> Centroid {
+    let centroid = rect.getCentroid()
+    let azimuth = self.calculateAngle(
+      coord: Double(centroid.x),
+      width: UIScreen.main.bounds.width,
+      fov: Constants.i7FOVx
+    )
+
+    let polar = self.calculateAngle(
+      coord: Double(centroid.y),
+      width: UIScreen.main.bounds.height,
+      fov: Constants.i7FOVy
+    )
+
     return (
       polar: polar,
       azimuth: azimuth,
-      distance: 0
+      distance: 0,
+      isDetected: true
     )
   }
 
-  internal func calculateHorizontalAngle (from point: DBugPoint) -> Double {
-    let fov = Constants.iphone7FOV
-    let width = Double(UIScreen.main.bounds.width)
-    let distance = width - point.x
-    return (fov * distance) / width
+  internal func calculateAngle (coord: Double, width: CGFloat, fov: Double) -> Double {
+    let w = Double(width)
+    let distance = w - coord
+    return (fov * distance) / w
   }
 
-  internal func calculateVerticalAngle (from point: DBugPoint) -> Double {
-    let fov = Constants.iphone7FOV
-    let height = Double(UIScreen.main.bounds.height)
-    let distance = height - point.y
-    return (fov * distance) / height
+  internal func calculateDistance (from rect: Rectangle) -> Double {
+    // TODO
+    return 0.0
   }
 }

@@ -57,6 +57,20 @@ class CameraManager {
   }
 
   /**
+   * Sets the flash state of the camera.
+   * - parameter newState: A boolean stating the new state of the flash.
+   */
+  func setFlash (_ newState: Bool) throws {
+    try self.device.lockForConfiguration()
+    if newState {
+      try self.device.setTorchModeOn(level: 1.0)
+    } else {
+      self.device.torchMode = .off
+    }
+    self.device.unlockForConfiguration()
+  }
+
+  /**
    * Prepares the session to have certain configurations.
    * - parameter delegate: The delegate to attach to the session
    */

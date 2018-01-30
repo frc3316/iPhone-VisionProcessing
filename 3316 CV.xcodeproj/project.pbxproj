@@ -11,7 +11,7 @@
 		A52105E61F6A83DE00EF85CF /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52105E51F6A83DE00EF85CF /* Logger.swift */; };
 		A52D6B8A1F5ACF53009E2171 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D6B891F5ACF53009E2171 /* Types.swift */; };
 		A547EFBD1F3F8529007C89BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547EFBC1F3F8529007C89BA /* AppDelegate.swift */; };
-		A547EFBF1F3F8529007C89BA /* CalibrateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547EFBE1F3F8529007C89BA /* CalibrateViewController.swift */; };
+		A547EFBF1F3F8529007C89BA /* RunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547EFBE1F3F8529007C89BA /* RunViewController.swift */; };
 		A547EFC21F3F8529007C89BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A547EFC01F3F8529007C89BA /* Main.storyboard */; };
 		A547EFC41F3F8529007C89BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A547EFC31F3F8529007C89BA /* Assets.xcassets */; };
 		A547EFC71F3F8529007C89BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A547EFC51F3F8529007C89BA /* LaunchScreen.storyboard */; };
@@ -19,6 +19,8 @@
 		A5639CB71F77C9EA00D4C5DE /* SizeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5639CB61F77C9EA00D4C5DE /* SizeManager.swift */; };
 		A575F3D31F4782CB00C56B49 /* RectangleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575F3D21F4782CB00C56B49 /* RectangleManager.swift */; };
 		A575F3D61F478A5600C56B49 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A575F3D51F478A5600C56B49 /* .swiftlint.yml */; };
+		A57B07DA1FE7ED9B007ABBBF /* NewRectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A57B07D91FE7ED9B007ABBBF /* NewRectUtils.m */; };
+		A57B07DF1FE7FF7E007ABBBF /* CalibrateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B07DE1FE7FF7E007ABBBF /* CalibrateViewController.swift */; };
 		A58029B11F3FA37C002EA94A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58029B01F3FA37C002EA94A /* Extensions.swift */; };
 		A58029B71F3FBF49002EA94A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58029B61F3FBF49002EA94A /* MenuViewController.swift */; };
 		A58029B91F3FC241002EA94A /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58029B81F3FC241002EA94A /* RoundButton.swift */; };
@@ -29,7 +31,9 @@
 		A58988C91F6B1E4C004CB616 /* RectUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = A58988C11F6B1E4C004CB616 /* RectUtils.mm */; };
 		A58988CA1F6B1E4C004CB616 /* Detector.mm in Sources */ = {isa = PBXBuildFile; fileRef = A58988C41F6B1E4C004CB616 /* Detector.mm */; };
 		A58D8F441F50BCBE00758EC5 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58D8F431F50BCBE00758EC5 /* AssetsLibrary.framework */; };
+		A58DB8951F878EBB00184FE8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58DB8941F878EBB00184FE8 /* NetworkManager.swift */; };
 		A5A2CA221F72A33500CF5E0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A5A2CA211F72A33500CF5E0E /* README.md */; };
+		A5D426D21F841B5E0061A0C7 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D426D11F841B5E0061A0C7 /* DeviceManager.swift */; };
 		A5F541F41F575D6F008B2754 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F541F31F575D6F008B2754 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +58,7 @@
 		A543533E1F50CEEB001CA91B /* libopencv_imgproc.3.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.3.3.0.dylib; path = ../../../../../usr/local/Cellar/opencv/3.3.0_3/lib/libopencv_imgproc.3.3.0.dylib; sourceTree = "<group>"; };
 		A547EFB91F3F8529007C89BA /* 3316 CV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "3316 CV.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A547EFBC1F3F8529007C89BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A547EFBE1F3F8529007C89BA /* CalibrateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrateViewController.swift; sourceTree = "<group>"; };
+		A547EFBE1F3F8529007C89BA /* RunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunViewController.swift; sourceTree = "<group>"; };
 		A547EFC11F3F8529007C89BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A547EFC31F3F8529007C89BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A547EFC61F3F8529007C89BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -63,6 +67,9 @@
 		A5639CB61F77C9EA00D4C5DE /* SizeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeManager.swift; sourceTree = "<group>"; };
 		A575F3D21F4782CB00C56B49 /* RectangleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleManager.swift; sourceTree = "<group>"; };
 		A575F3D51F478A5600C56B49 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		A57B07D91FE7ED9B007ABBBF /* NewRectUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewRectUtils.m; sourceTree = "<group>"; };
+		A57B07DB1FE7EDA9007ABBBF /* NewRectUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewRectUtils.h; sourceTree = "<group>"; };
+		A57B07DE1FE7FF7E007ABBBF /* CalibrateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrateViewController.swift; sourceTree = "<group>"; };
 		A58029B01F3FA37C002EA94A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A58029B61F3FBF49002EA94A /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		A58029B81F3FC241002EA94A /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
@@ -80,9 +87,11 @@
 		A58988C41F6B1E4C004CB616 /* Detector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Detector.mm; sourceTree = "<group>"; };
 		A58D8F431F50BCBE00758EC5 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		A58D8F451F50C12A00758EC5 /* 3316 CV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "3316 CV-Bridging-Header.h"; sourceTree = "<group>"; };
+		A58DB8941F878EBB00184FE8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A5A2CA211F72A33500CF5E0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		A5B147471F6FD7A200BEF6A2 /* VisionConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisionConstants.h; sourceTree = "<group>"; };
+		A5B147471F6FD7A200BEF6A2 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		A5B147491F6FD7F400BEF6A2 /* Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		A5D426D11F841B5E0061A0C7 /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		A5F541F31F575D6F008B2754 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E731B96F49027F2D7F12CF48 /* Pods_3316_CV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3316_CV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F343069D0514AC623D1606C9 /* Pods-3316 CV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3316 CV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-3316 CV/Pods-3316 CV.debug.xcconfig"; sourceTree = "<group>"; };
@@ -165,6 +174,8 @@
 				A547EFCE1F3F85B0007C89BA /* CameraManager.swift */,
 				A575F3D21F4782CB00C56B49 /* RectangleManager.swift */,
 				A5639CB61F77C9EA00D4C5DE /* SizeManager.swift */,
+				A5D426D11F841B5E0061A0C7 /* DeviceManager.swift */,
+				A58DB8941F878EBB00184FE8 /* NetworkManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -172,7 +183,8 @@
 		A58029B51F3FAA6B002EA94A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A547EFBE1F3F8529007C89BA /* CalibrateViewController.swift */,
+				A547EFBE1F3F8529007C89BA /* RunViewController.swift */,
+				A57B07DE1FE7FF7E007ABBBF /* CalibrateViewController.swift */,
 				A58029B61F3FBF49002EA94A /* MenuViewController.swift */,
 			);
 			path = Controllers;
@@ -211,13 +223,15 @@
 			isa = PBXGroup;
 			children = (
 				A5B147491F6FD7F400BEF6A2 /* Utilities.h */,
-				A5B147471F6FD7A200BEF6A2 /* VisionConstants.h */,
+				A5B147471F6FD7A200BEF6A2 /* Constants.h */,
 				A58988BC1F6B1E4C004CB616 /* ColorUtils.h */,
 				A58988BD1F6B1E4C004CB616 /* ColorUtils.mm */,
 				A58988BE1F6B1E4C004CB616 /* CVUtils.h */,
 				A58988BF1F6B1E4C004CB616 /* CVUtils.mm */,
 				A58988C01F6B1E4C004CB616 /* RectUtils.h */,
 				A58988C11F6B1E4C004CB616 /* RectUtils.mm */,
+				A57B07DB1FE7EDA9007ABBBF /* NewRectUtils.h */,
+				A57B07D91FE7ED9B007ABBBF /* NewRectUtils.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -323,13 +337,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-3316 CV-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4CE2AB695A63C645BB150E6C /* [CP] Embed Pods Frameworks */ = {
@@ -338,9 +355,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-3316 CV/Pods-3316 CV-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -382,19 +402,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A58DB8951F878EBB00184FE8 /* NetworkManager.swift in Sources */,
 				A58988CA1F6B1E4C004CB616 /* Detector.mm in Sources */,
 				A5F541F41F575D6F008B2754 /* Constants.swift in Sources */,
 				A5639CB71F77C9EA00D4C5DE /* SizeManager.swift in Sources */,
 				A52D6B8A1F5ACF53009E2171 /* Types.swift in Sources */,
+				A57B07DF1FE7FF7E007ABBBF /* CalibrateViewController.swift in Sources */,
 				A58988C91F6B1E4C004CB616 /* RectUtils.mm in Sources */,
 				A58988C51F6B1E4C004CB616 /* ColorFilter.mm in Sources */,
 				A575F3D31F4782CB00C56B49 /* RectangleManager.swift in Sources */,
 				A52105E61F6A83DE00EF85CF /* Logger.swift in Sources */,
 				A58029B71F3FBF49002EA94A /* MenuViewController.swift in Sources */,
+				A57B07DA1FE7ED9B007ABBBF /* NewRectUtils.m in Sources */,
 				A58988C71F6B1E4C004CB616 /* ColorUtils.mm in Sources */,
 				A58029B91F3FC241002EA94A /* RoundButton.swift in Sources */,
 				A58988C81F6B1E4C004CB616 /* CVUtils.mm in Sources */,
-				A547EFBF1F3F8529007C89BA /* CalibrateViewController.swift in Sources */,
+				A547EFBF1F3F8529007C89BA /* RunViewController.swift in Sources */,
+				A5D426D21F841B5E0061A0C7 /* DeviceManager.swift in Sources */,
 				A547EFCF1F3F85B0007C89BA /* CameraManager.swift in Sources */,
 				A547EFBD1F3F8529007C89BA /* AppDelegate.swift in Sources */,
 				A58988C61F6B1E4C004CB616 /* DBugColor.mm in Sources */,

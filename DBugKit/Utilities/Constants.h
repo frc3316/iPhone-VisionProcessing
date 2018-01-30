@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 
-//! DBugVision constants
+//! Vision constants
 #define MIN_CONTOUR_AREA 550
 #define MAX_CONTOUR_AREA 4800
 #define MIN_HEIGHT_WIDTH_RATIO 0

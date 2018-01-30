@@ -9,7 +9,7 @@
 #import <opencv2/opencv.hpp>
 #import <AVFoundation/AVFoundation.h>
 #import <stdio.h>
-#import "RectUtils.h"
+#import "NewRectUtils.h"
 
 using namespace cv;
 using namespace std;
@@ -17,6 +17,7 @@ using namespace std;
 // Custom types
 using Polygon = vector<cv::Point>;
 using PolygonArray = vector<Polygon>;
+using RectInfoTuple = tuple<RotatedRect, cv::Rect>;
 
 // Matrix manipulations
 Mat sampleToMat (CMSampleBufferRef sample);
@@ -24,9 +25,9 @@ Mat maskFrame (Mat frame, Scalar lowerBound, Scalar upperBound);
 Mat thresholdFrame (Mat maskedFrame, double thresh, bool hasFlash);
 
 // Type handling
-DBugPoint *dbugPointFromPoint (Point2f point);
-DBugRect *rectFromPoints (Point2f tl, Point2f tr, Point2f br, Point2f bl);
+Rectangle *rectFromCVRect (RotatedRect rotatedRect);
+Rectangle *rectFromCVRect (cv::Rect boundingRectangle);
 
 // Contours
-vector<RotatedRect> filterContours (PolygonArray contours);
-NSMutableArray<DBugRect *> *mapContours (vector<RotatedRect> rects);
+vector<RectInfoTuple> filterContours (PolygonArray contours);
+NSMutableArray<Rectangle *> *mapContours (vector<RectInfoTuple> rects);

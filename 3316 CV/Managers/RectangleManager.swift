@@ -10,7 +10,7 @@ import UIKit
 
 class RectangleManager {
   // Internal instance members
-  internal var rect: DBugRect?
+  internal var rect: Rectangle?
 
   //! Sets the fill color for the shape layer
   var fillColor: UIColor = UIColor.clear
@@ -31,7 +31,7 @@ class RectangleManager {
    * The RectangleManager constructor.
    * - parameter points: The initial points array of the rectangle.
    */
-  init (rect: DBugRect? = nil) {
+  init (rect: Rectangle? = nil) {
     self.rect = rect
   }
 
@@ -48,10 +48,10 @@ class RectangleManager {
     guard let rect = self.rect else { return shape }
 
     // Get CGPoints of DBugPoints
-    let topLeft = rect.topLeft.cgPoint()
-    let topRight = rect.topRight.cgPoint()
-    let bottomRight = rect.bottomRight.cgPoint()
-    let bottomLeft = rect.bottomLeft.cgPoint()
+    let topLeft = rect.topLeft
+    let topRight = rect.topRight
+    let bottomRight = rect.bottomRight
+    let bottomLeft = rect.bottomLeft
 
     // Render the path on the layer
     let path = UIBezierPath()
@@ -63,7 +63,7 @@ class RectangleManager {
     shape.path = path.cgPath
 
     // Render the centeroid of the polygon
-    let center = rect.getCenteroid().cgPoint()
+    let center = rect.getCentroid()
     let cl = self.getPointLayer(for: center, colored: UIColor.red)
     shape.addSublayer(cl)
 
@@ -86,8 +86,9 @@ class RectangleManager {
    * Changes the internal state's points array to be a new one.
    * - parameter points: The new points array
    */
-  func emit (rect: DBugRect) {
-    self.rect = rect.scalePoints(withFactor: Constants.scaleFactor)
+  func emit (rect: Rectangle) {
+    rect.scale(withFactor: Constants.scaleFactor)
+    self.rect = rect
   }
 
   // MARK: Internal functions

@@ -27,6 +27,13 @@ using namespace cv;
 
 - (UIImage *) filterColorsOfBuffer: (CMSampleBufferRef) buffer isFlashOn: (bool) isFlashOn {
   Mat input = sampleToMat(buffer);
+  bool isBlack = self.lowerBoundColor.h == 0.0
+              && self.lowerBoundColor.s == 0.0
+              && self.lowerBoundColor.v == 0.0;
+  bool isWhite = self.upperBoundColor.h == 255.0
+              && self.upperBoundColor.s == 255.0
+              && self.upperBoundColor.v == 255.0;
+  if (isBlack && isWhite) return MatToUIImage(input);
   Scalar lb = colorToScalar(self.lowerBoundColor);
   Scalar ub = colorToScalar(self.upperBoundColor);
   Mat masked = maskFrame(input, lb, ub);

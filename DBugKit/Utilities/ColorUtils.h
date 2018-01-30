@@ -6,7 +6,7 @@
 //  Copyright © 2017 Jonathan Ohayon. All rights reserved.
 //
 
-#import "VisionConstants.h"
+#import "Constants.h"
 #import <opencv2/opencv.hpp>
 #import "../Color/DBugColor.h"
 

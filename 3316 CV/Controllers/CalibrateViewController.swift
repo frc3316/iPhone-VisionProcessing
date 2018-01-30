@@ -1,11 +1,11 @@
 //
-//  ViewController.swift
+//  CalibrateViewController.swift
 //  3316 CV
 //
-//  Created by Jonathan Ohayon on 12/08/2017.
+//  Created by Jonathan Ohayon on 18/12/2017.
 //  Copyright © 2017 Jonathan Ohayon. All rights reserved.
+//
 
-import AVFoundation
 import UIKit
 
 class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
@@ -13,62 +13,37 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
   override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .landscapeRight }
 
   let cameraManager: CameraManager = CameraManager(type: .video, settings: Constants.camera)
-  let rectManager: RectangleManager = RectangleManager()
-  let sizeManager: SizeManager = SizeManager(measures: Constants.goalMeasures)
-
-  // Color filter
-  let colorFilter: ColorFilter = ColorFilter(
-    lowerBoundColor: Constants.lowerColorBound,
-    upperBoundColor: Constants.upperColorBound
-  )
-
-  let detector: Detector = Detector()
-
   @IBOutlet weak var preview: UIImageView!
-  @IBOutlet weak var vAngleLabel: UILabel!
-  @IBOutlet weak var hAngleLabel: UILabel!
-  
-  override func viewDidLoad () {
+  @IBOutlet weak var flashSwitch: UISwitch!
+
+  @IBAction func flashSwitched (_ sender: UISwitch) {
+    try? self.cameraManager.setFlash(sender.isOn)
+  }
+
+  @IBAction func back(_ sender: Any) {
+    _ = navigationController?.popToRootViewController(animated: true)
+  }
+
+  override func viewDidLoad() {
     super.viewDidLoad()
-
+    self.flashSwitch.setOn(Constants.camera.flash, animated: true)
     self.cameraManager.run(on: self.view, with: self)
-
-    let frame = self.view.frame
-    self.rectManager.frame = frame
-    self.view.layer.addSublayer(self.rectManager.render(in: frame))
   }
 
-  override func didReceiveMemoryWarning () {
+  override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
   }
 
-  func captureOutput(_ output: AVCaptureOutput,
-                     didOutput sampleBuffer: CMSampleBuffer,
-                     from connection: AVCaptureConnection) {
-    // 1. Draw the masked colors image to the screen
-    let masked = self.colorFilter.filterColors(of: sampleBuffer, isFlashOn: Constants.camera.flash)
+  func captureOutput (_ output: AVCaptureOutput,
+                      didDrop sampleBuffer: CMSampleBuffer,
+                      from connection: AVCaptureConnection) {
+    let lb = DBugColor(hue: 0, saturation: 0, value: 0)
+    let ub = DBugColor(hue: 255, saturation: 255, value: 255)
+    let colorFilter = ColorFilter(lowerBoundColor: lb, upperBoundColor: ub)
+    let masked = colorFilter?.filterColors(of: sampleBuffer, isFlashOn: Constants.camera.flash)
     DispatchQueue.main.async {
       self.preview.image = masked
-      self.preview.layer.sublayers?.removeAll()
-    }
-
-    // 2. Find the minimal bounding rectangles and get the biggest one's points array
-    let boundingRects = self.detector.getBoundingRects(in: masked!) ?? []
-    guard boundingRects.count > 0 else { Log.d("No rects found"); return }
-
-    // 3. Draw them to the screen
-    DispatchQueue.main.async {
-      let frame = self.preview.frame
-
-      // Get the distance and the angle from the rectangle
-      let centroid = self.sizeManager.distanceFrom(rect: boundingRects[0])
-      self.hAngleLabel.text = "Polar: \(centroid.polar)"
-      self.vAngleLabel.text = "Azimuth: \(centroid.azimuth)"
-
-      // The first rectangle is the best match to our criteria
-      self.rectManager.emit(rect: boundingRects[0])
-      let layer = self.rectManager.render(in: frame)
-      self.preview.layer.addSublayer(layer)
     }
   }
 }

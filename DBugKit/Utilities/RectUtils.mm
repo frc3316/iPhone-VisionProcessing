@@ -31,6 +31,11 @@
                                     y: self.y * dy];
 }
 
+- (DBugPoint *) transformedWithX: (double) dx y: (double) dy {
+  return [[DBugPoint alloc] initWithX: self.x + dx
+                                    y: self.y + dy];
+}
+
 - (double) distanceFromPoint: (DBugPoint *) point {
   double dxs = exp2(self.x - point.x);
   double dys = exp2(self.y - point.y);
@@ -92,11 +97,31 @@
                                 bottomLeft: bl];
 }
 
+- (double) getWidth {
+  return [self.topLeft distanceFromPoint: self.topRight];
+}
+
+- (double) getHeight {
+  return [self.topLeft distanceFromPoint: self.bottomLeft];
+}
+
 - (CGRect) CGRect {
-  double width = [self.topLeft distanceFromPoint: self.topRight];
-  double height = [self.topLeft distanceFromPoint: self.bottomLeft];
+  double width = [self getWidth];
+  double height = [self getHeight];
   CGRect r = CGRectMake(self.topLeft.x, self.topLeft.y, width, height);
   return r;
+}
+
+@end
+
+@implementation RectVector
+
+- (id) initWithRect1: (DBugRect *) rect1 rect2: (DBugRect *) rect2 {
+  if (self = [super init]) {
+    self.rect1 = rect1;
+    self.rect2 = rect2;
+  }
+  return self;
 }
 
 @end

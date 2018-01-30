@@ -14,12 +14,12 @@
 
 @implementation Detector
 
-- (NSMutableArray<DBugRect *> *) getBoundingRectsInImage: (UIImage *) image {
+- (NSMutableArray<Rectangle *> *) getBoundingRectsInImage: (UIImage *) image {
   Mat mat;
   UIImageToMat(image, mat);
   PolygonArray contours;
   findContours(mat, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_TC89_KCOS);
-  vector<RotatedRect> filtered = filterContours(contours);
+  vector<RectInfoTuple> filtered = filterContours(contours);
   return mapContours(filtered);
 }
 
