@@ -1,2 +1,4 @@
 disabled_rules:
   - todo
+  - statement_position
+  - force_cast

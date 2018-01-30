@@ -8,7 +8,7 @@
 import AVFoundation
 import UIKit
 
-class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+class RunViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
   override var shouldAutorotate: Bool { return false }
   override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .landscapeRight }
 
@@ -24,7 +24,8 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
   let detector: Detector = Detector()
 
   @IBOutlet weak var preview: UIImageView!
-
+  @IBOutlet weak var dataLabel: UILabel!
+  
   override func viewDidLoad () {
     super.viewDidLoad()
 
@@ -44,8 +45,9 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
                      from connection: AVCaptureConnection) {
     // 1. Draw the masked colors image to the screen
     let masked = self.colorFilter.filterColors(of: sampleBuffer, isFlashOn: Constants.camera.flash)
+    let regularImage = self.colorFilter.image(from: sampleBuffer)
     DispatchQueue.main.async {
-      self.preview.image = masked
+      self.preview.image = regularImage
       self.preview.layer.sublayers?.removeAll()
     }
 
@@ -53,7 +55,10 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
     let boundingRects = self.detector.getBoundingRects(in: masked!) ?? []
     guard boundingRects.count > 0 else { Log.d("No rects found"); return }
 
-    // 3. Draw them to the screen
+    // 3. Calculate the data using the rectangle
+    let data = SizeManager.calculateData(from: boundingRects[0])
+
+    // 4. Draw everything to the screen
     DispatchQueue.main.async {
       let frame = self.preview.frame
 
@@ -61,6 +66,8 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
       self.rectManager.emit(rect: boundingRects[0], in: frame)
       let layer = self.rectManager.render(in: frame)
       self.preview.layer.addSublayer(layer)
+
+      self.dataLabel.text = "Azimuth: \(data.0), Distance: \(data.1)"
     }
   }
 }

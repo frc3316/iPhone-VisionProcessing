@@ -26,7 +26,9 @@ typealias Centroid = (
   angle: Double
 )
 
-typealias Measures = (
-  width: Double,
-  height: Double
+//! Size manager configuration
+typealias Sizes = (
+  powerCubeArea: Double,
+  singlePowerCubeRatio: Double,
+  doublePowerCubeRatio: Double
 )

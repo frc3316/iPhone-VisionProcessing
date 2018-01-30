@@ -11,16 +11,16 @@ import Foundation
 //! Constant global values
 struct Constants {
   // Color filter configurations
-  static let lowerColorBound = DBugColor(hue: 40, saturation: 100, value: 30)
-  static let upperColorBound = DBugColor(hue: 80, saturation: 255, value: 255)
+  static let lowerColorBound = DBugColor(hue: 20, saturation: 100, value: 100)
+  static let upperColorBound = DBugColor(hue: 30, saturation: 255, value: 255)
 
   // Camera settings
   static let camera: CameraSettings = (
     exposure: (
-      duration: 1100,
+      duration: 25,
       iso: 22
     ),
-    flash: false
+    flash: true
   )
 
   // Taken from https://goo.gl/Nq92tY
@@ -29,4 +29,10 @@ struct Constants {
   // Rectangle manager settings
   static let scaleFactor = 0.53
   static let pointLayerWidth = 10
+
+  static let sizeConstants: Sizes = (
+    powerCubeArea: 13600,
+    singlePowerCubeRatio: 1.5,
+    doublePowerCubeRatio: 2.5
+  )
 }

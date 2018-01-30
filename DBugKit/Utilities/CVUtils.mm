@@ -57,6 +57,15 @@ DBugRect *rectFromPoints (Point2f tl, Point2f tr, Point2f br, Point2f bl) {
                                 bottomLeft: bld];
 }
 
+DBugRect *dbugRectFromRotated (RotatedRect rect) {
+  Point2f vtx[4]; rect.points(vtx);
+  DBugRect *dbugRect = rectFromPoints(vtx[0], vtx[1], vtx[2], vtx[3]);
+  dbugRect.width = rect.boundingRect2f().width;
+  dbugRect.height = rect.boundingRect2f().height;
+  dbugRect.angle = rect.angle;
+  return dbugRect;
+}
+
 bool shouldFilterContour (int numOfPoints, double area, double ratio, Polygon convex) {
   bool isInAreaRange = area >= MIN_CONTOUR_AREA && area <= MAX_CONTOUR_AREA;
   bool isInRatioRange = ratio >= MIN_HEIGHT_WIDTH_RATIO && ratio <= MAX_HEIGHT_WIDTH_RATIO;
@@ -85,8 +94,7 @@ vector<RotatedRect> filterContours (PolygonArray contours) {
 NSMutableArray<DBugRect *> *mapContours (vector<RotatedRect> rects) {
   id transformed = [[NSMutableArray alloc] init];
   for_each(rects.begin(), rects.end(), [&transformed] (RotatedRect rect) {
-    Point2f vtx[4]; rect.points(vtx);
-    DBugRect *rectd = rectFromPoints(vtx[0], vtx[1], vtx[2], vtx[3]);
+    DBugRect *rectd = dbugRectFromRotated(rect);
     [transformed addObject:rectd];
   });
   return transformed;

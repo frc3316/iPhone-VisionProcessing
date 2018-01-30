@@ -34,4 +34,10 @@ using namespace cv;
   return MatToUIImage(thresh);
 }
 
+- (UIImage *) imageFromBuffer: (CMSampleBufferRef) buffer {
+  Mat output;
+  cvtColor(sampleToMat(buffer), output, CV_BGR2RGB);
+  return MatToUIImage(output);
+}
+
 @end

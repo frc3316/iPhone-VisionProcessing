@@ -35,6 +35,9 @@
 @property (nonatomic) DBugPoint *topRight;
 @property (nonatomic) DBugPoint *bottomRight;
 @property (nonatomic) DBugPoint *bottomLeft;
+@property (nonatomic) double width;
+@property (nonatomic) double height;
+@property (nonatomic) double angle;
 
 - (id) initWithTopLeft: (DBugPoint *) tl
               topRight: (DBugPoint *) tr
