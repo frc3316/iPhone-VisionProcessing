@@ -258,7 +258,6 @@
 				A547EFB71F3F8529007C89BA /* Resources */,
 				A575F3D41F47883000C56B49 /* ShellScript */,
 				4CE2AB695A63C645BB150E6C /* [CP] Embed Pods Frameworks */,
-				BE6A383011565D9A41A5C3E2 /* [CP] Copy Pods Resources */,
 				A579062F1F51F965003E5900 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -344,13 +343,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-3316 CV/Pods-3316 CV-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-3316 CV/Pods-3316 CV-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-3316 CV/Pods-3316 CV-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A575F3D41F47883000C56B49 /* ShellScript */ = {
@@ -365,21 +367,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"⚠️ Warning - swiftlint is not installed! Install from https://github.com/realm/SwiftLint ⚠️\"\nfi";
-		};
-		BE6A383011565D9A41A5C3E2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-3316 CV/Pods-3316 CV-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
