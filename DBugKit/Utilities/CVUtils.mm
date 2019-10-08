@@ -22,26 +22,22 @@ Mat sampleToMat (CMSampleBufferRef sample) {
   size_t height = CVPixelBufferGetHeight(buf);
   unsigned char *address = (unsigned char*) CVPixelBufferGetBaseAddress(buf);
 
-  Mat mat = Mat((int) height, (int) width, CV_8UC4, address, bytesPerRow);
+  Mat mat((int) height, (int) width, CV_8UC4, address, bytesPerRow);
   CVPixelBufferUnlockBaseAddress(buf, 0);
+
   return mat;
 }
 
-Mat maskFrame (Mat frame, Scalar lowerBound, Scalar upperBound) {
-  Mat hsv, ranged;
-  cvtColor(frame, hsv, CV_BGR2HSV);
-  Scalar lb = lowerBound, ub = upperBound;
-  inRange(hsv, lb, ub, ranged);
-  return ranged;
+void maskFrame (Mat *frame, Scalar lowerBound, Scalar upperBound) {
+  cvtColor(*frame, *frame, CV_BGR2HSV);
+  inRange(*frame, lowerBound, upperBound, *frame);
 }
 
-Mat thresholdFrame (Mat maskedFrame, double thresh, bool hasFlash) {
-  Mat thresholded;
-  threshold(maskedFrame, thresholded, thresh, 255, CV_THRESH_BINARY);
-  erode(thresholded, thresholded, Mat());
+void thresholdFrame (Mat *frame, double thresh, bool hasFlash) {
+  threshold(*frame, *frame, thresh, 255, CV_THRESH_BINARY);
+  erode(*frame, *frame, Mat());
   // If the flash is turned on, we should erode the image another time to get rid of the small reflections
-  if (hasFlash) erode(thresholded, thresholded, Mat());
-  return thresholded;
+  if (hasFlash) erode(*frame, *frame, Mat());
 }
 
 DBugPoint *dbugPointFromPoint (Point2f point) { return [[DBugPoint alloc] initWithX: point.x y: point.y]; }
@@ -86,7 +82,8 @@ vector<RotatedRect> filterContours (PolygonArray contours) {
                                             contourArea(convex) / 100.0, // Convex hull area
                                             rect.boundingRect2f().height / rect.boundingRect2f().width, // Bounding rectangle height-width ratio
                                             convex); // The convex hull itself
-    if (shouldFilter) filtered.push_back(rect);
+//    if (shouldFilter)
+    filtered.push_back(rect);
   });
   return filtered;
 }

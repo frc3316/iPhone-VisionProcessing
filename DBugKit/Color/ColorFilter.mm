@@ -26,12 +26,12 @@ using namespace cv;
 }
 
 - (UIImage *) filterColorsOfBuffer: (CMSampleBufferRef) buffer isFlashOn: (bool) isFlashOn {
-  Mat input = sampleToMat(buffer);
+  Mat frame = sampleToMat(buffer);
   Scalar lb = colorToScalar(self.lowerBoundColor);
   Scalar ub = colorToScalar(self.upperBoundColor);
-  Mat masked = maskFrame(input, lb, ub);
-  Mat thresh = thresholdFrame(masked, 25, isFlashOn);
-  return MatToUIImage(thresh);
+  maskFrame(&frame, lb, ub);
+  thresholdFrame(&frame, 25, isFlashOn);
+  return MatToUIImage(frame);
 }
 
 - (UIImage *) imageFromBuffer: (CMSampleBufferRef) buffer {

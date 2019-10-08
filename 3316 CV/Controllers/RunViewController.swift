@@ -12,9 +12,6 @@ class RunViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferD
   override var shouldAutorotate: Bool { return false }
   override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .landscapeRight }
 
-  let cameraManager: CameraManager = CameraManager(type: .video, settings: Constants.camera)
-  let rectManager: RectangleManager = RectangleManager()
-
   // Color filter
   let colorFilter: ColorFilter = ColorFilter(
     lowerBoundColor: Constants.lowerColorBound,
@@ -25,15 +22,15 @@ class RunViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferD
 
   @IBOutlet weak var preview: UIImageView!
   @IBOutlet weak var dataLabel: UILabel!
-  
+
   override func viewDidLoad () {
     super.viewDidLoad()
 
-    self.cameraManager.run(on: self.view, with: self)
+    CameraManager.sharedVideo.run(on: self.view, with: self)
 
     let frame = self.view.frame
-    self.rectManager.frame = frame
-    self.view.layer.addSublayer(self.rectManager.render(in: frame))
+    RectangleManager.shared.frame = frame
+    self.view.layer.addSublayer(RectangleManager.shared.render(in: frame))
   }
 
   override func didReceiveMemoryWarning () {
@@ -63,8 +60,8 @@ class RunViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferD
       let frame = self.preview.frame
 
       // The first rectangle is the best match to our criteria
-      self.rectManager.emit(rect: boundingRects[0], in: frame)
-      let layer = self.rectManager.render(in: frame)
+      RectangleManager.shared.emit(rect: boundingRects[0], in: frame)
+      let layer = RectangleManager.shared.render(in: frame)
       self.preview.layer.addSublayer(layer)
 
       self.dataLabel.text = "Azimuth: \(data.0), Distance: \(data.1)"

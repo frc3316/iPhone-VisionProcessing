@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7958FD4AB7A8629257966961 /* Pods_3316_CV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E731B96F49027F2D7F12CF48 /* Pods_3316_CV.framework */; };
+		A50085F6234C8A690053A448 /* CalibrateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50085F5234C8A690053A448 /* CalibrateViewController.swift */; };
 		A52105E61F6A83DE00EF85CF /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52105E51F6A83DE00EF85CF /* Logger.swift */; };
 		A52D6B8A1F5ACF53009E2171 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D6B891F5ACF53009E2171 /* Types.swift */; };
 		A547EFBD1F3F8529007C89BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547EFBC1F3F8529007C89BA /* AppDelegate.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		5077F4E49F3AE09AB04A3316 /* Pods-3316 CV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3316 CV.release.xcconfig"; path = "Pods/Target Support Files/Pods-3316 CV/Pods-3316 CV.release.xcconfig"; sourceTree = "<group>"; };
+		A50085F5234C8A690053A448 /* CalibrateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrateViewController.swift; sourceTree = "<group>"; };
 		A52105E51F6A83DE00EF85CF /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A52D6B891F5ACF53009E2171 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		A543533C1F50CEB8001CA91B /* libopencv_core.3.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.3.3.0.dylib; path = ../../../../../usr/local/Cellar/opencv/3.3.0_3/lib/libopencv_core.3.3.0.dylib; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			children = (
 				A547EFBE1F3F8529007C89BA /* RunViewController.swift */,
 				A58029B61F3FBF49002EA94A /* MenuViewController.swift */,
+				A50085F5234C8A690053A448 /* CalibrateViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -274,7 +277,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "Jonathan Ohayon";
 				TargetAttributes = {
 					A547EFB81F3F8529007C89BA = {
@@ -393,6 +396,7 @@
 				A58988C51F6B1E4C004CB616 /* ColorFilter.mm in Sources */,
 				A575F3D31F4782CB00C56B49 /* RectangleManager.swift in Sources */,
 				A52105E61F6A83DE00EF85CF /* Logger.swift in Sources */,
+				A50085F6234C8A690053A448 /* CalibrateViewController.swift in Sources */,
 				A58029B71F3FBF49002EA94A /* MenuViewController.swift in Sources */,
 				A58988C71F6B1E4C004CB616 /* ColorUtils.mm in Sources */,
 				A58029B91F3FC241002EA94A /* RoundButton.swift in Sources */,
@@ -441,6 +445,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -448,6 +453,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -498,6 +504,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -505,6 +512,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -541,7 +549,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = MLPY8SFS4S;
+				DEVELOPMENT_TEAM = 3BR9YC633Z;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -569,7 +577,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = MLPY8SFS4S;
+				DEVELOPMENT_TEAM = 3BR9YC633Z;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

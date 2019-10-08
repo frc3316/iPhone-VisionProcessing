@@ -17,6 +17,9 @@ class CameraManager {
   /// The capture device to attach to the session
   internal let device: AVCaptureDevice
 
+  /// A shared mananger instance (singleton)
+  static let sharedVideo: CameraManager = CameraManager(type: .video, settings: Constants.camera)
+
   /**
    * Initializes the CameraManager instance.
    * - parameter type: The wanted type of the device for the session
@@ -95,8 +98,8 @@ class CameraManager {
     try? camera.lockForConfiguration()
     if settings.flash { try? camera.setTorchModeOn(level: 1.0) }
     camera.setExposureModeCustom(
-      duration: CMTimeMake(1, settings.exposure.duration),
-      iso: settings.exposure.iso,
+      duration: CMTimeMake(1, settings.exposure),
+      iso: camera.activeFormat.minISO,
       completionHandler: nil
     )
     camera.unlockForConfiguration()

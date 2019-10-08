@@ -21,8 +21,8 @@
                   deltaY: (double) dy;
 - (DBugPoint *) scaledWithX: (double) dx
                           y: (double) dy;
-- (double) getDistanceFromPoint: (DBugPoint *) point;
-- (DBugPoint *) getCenterWithPointB: (DBugPoint *) point;
+- (double) distanceFromPoint: (DBugPoint *) point;
+- (DBugPoint *) centerWithPointB: (DBugPoint *) point;
 
 - (CGPoint) CGPoint;
 

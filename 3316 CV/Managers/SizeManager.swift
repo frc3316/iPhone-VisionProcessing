@@ -38,11 +38,12 @@ class SizeManager {
   }
 
   internal static func getAzimuthAngle (for type: DetectedType, with centroid: DBugPoint) -> Double {
-    let viewAngle = Constants.iphone7FOV, frameWidth = Double(UIScreen.main.bounds.width)
+    let fov = Constants.iphone7FOV, width = Double(UIScreen.main.bounds.width)
     let ratio = self.getRatio(for: type)
+    let distance = width - centroid.x
 
     return ratio != Double.nan
-      ? ((centroid.x - frameWidth / ratio) / frameWidth) * viewAngle
+      ? ((fov * distance)) / width
       : Double.nan
   }
 
@@ -57,17 +58,17 @@ class SizeManager {
 
   internal static func getRectArea (_ rectangle: DBugRect, for type: DetectedType) -> Double {
     switch type {
-      case .singlePowerCube: return rectangle.width * rectangle.height
-      case .doublePowerCube: return (rectangle.width / 2) * rectangle.height
-      default: return Double.nan
+    case .singlePowerCube: return rectangle.width * rectangle.height
+    case .doublePowerCube: return (rectangle.width / 2) * rectangle.height
+    default: return Double.nan
     }
   }
 
   internal static func getRatio (for type: DetectedType) -> Double {
     switch type {
-      case .singlePowerCube: return 2.0
-      case .doublePowerCube: return 4.0
-      default: return Double.nan
+    case .singlePowerCube: return 2.0
+    case .doublePowerCube: return 4.0
+    default: return Double.nan
     }
   }
 }

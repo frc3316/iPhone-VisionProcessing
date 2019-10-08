@@ -27,6 +27,8 @@ class RectangleManager {
   // Set the frame of the shape layer
   var frame: CGRect?
 
+  static let shared: RectangleManager = RectangleManager()
+
   /**
    * The RectangleManager constructor.
    * - parameter points: The initial points array of the rectangle.
@@ -64,8 +66,8 @@ class RectangleManager {
 
     // Render the center point of the polygon
     let center = rect.getCenteroid().cgPoint()
-    let cl = self.getPointLayer(for: center, colored: UIColor.red)
-    shape.addSublayer(cl)
+    let centerLayer = self.getPointLayer(for: center, colored: UIColor.red)
+    shape.addSublayer(centerLayer)
 
     // Render the top left + bottom right in green
     let tlpl = self.getPointLayer(for: topLeft, colored: UIColor.green)
@@ -97,8 +99,8 @@ class RectangleManager {
    */
   internal func getPointLayer (for point: CGPoint, colored: UIColor) -> CALayer {
     let layer = CALayer()
-    let d = CGFloat(Constants.pointLayerWidth / 2)
-    let translation = CGAffineTransform(translationX: -d, y: -d)
+    let dist = CGFloat(Constants.pointLayerWidth / 2)
+    let translation = CGAffineTransform(translationX: -dist, y: -dist)
     let size = CGSize(width: Constants.pointLayerWidth, height: Constants.pointLayerWidth)
     layer.frame = CGRect(origin: point.applying(translation), size: size)
     layer.backgroundColor = colored.cgColor
