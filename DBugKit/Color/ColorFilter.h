@@ -19,5 +19,6 @@
 - (id) initWithLowerBoundColor: (DBugColor *) lowerBound
                upperBoundColor: (DBugColor *) upperBound;
 - (UIImage *) filterColorsOfBuffer: (CMSampleBufferRef) buffer isFlashOn: (bool) isFlashOn;
+- (UIImage *) imageFromBuffer: (CMSampleBufferRef) buffer;
 
 @end

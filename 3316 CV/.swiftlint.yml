@@ -1,3 +1,5 @@
 disabled_rules:
   - todo
   - discarded_notification_center_observer
+  - statement_position
+  - force_cast

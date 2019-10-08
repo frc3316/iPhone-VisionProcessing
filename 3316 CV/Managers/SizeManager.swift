@@ -10,42 +10,65 @@ import Foundation
 
 //! A class to manage the virtual vs irl sizes of objects
 class SizeManager {
-  let goalMeasures: Measures
-
-  init (measures: Measures) {
-    self.goalMeasures = measures
+  enum DetectedType: String {
+    case unableToProc = "-"
+    case singlePowerCube = "S"
+    case doublePowerCube = "D"
+    case multiplePowerCubes = "M"
   }
 
-  func distanceFrom (rect: Rectangle) -> Centroid {
-    let centroid = rect.getCentroid()
-    let azimuth = self.calculateAngle(
-      coord: Double(centroid.x),
-      width: UIScreen.main.bounds.width,
-      fov: Constants.i7FOVx
-    )
-
-    let polar = self.calculateAngle(
-      coord: Double(centroid.y),
-      width: UIScreen.main.bounds.height,
-      fov: Constants.i7FOVy
-    )
-
-    return (
-      polar: polar,
-      azimuth: azimuth,
-      distance: 0,
-      isDetected: true
-    )
+  static func calculateData (from rectangle: DBugRect) -> (Double, Double) {
+    let type = self.getResultType(of: rectangle)
+    let azimuth = self.getAzimuthAngle(for: type, with: rectangle.getCenteroid())
+    let distance = self.getApproximateDistance(for: type, from: rectangle)
+    return (distance: distance, azimuth: azimuth)
   }
 
-  internal func calculateAngle (coord: Double, width: CGFloat, fov: Double) -> Double {
-    let w = Double(width)
-    let distance = w - coord
-    return (fov * distance) / w
+  internal static func getResultType (of rectangle: DBugRect) -> DetectedType {
+    let owidth = rectangle.angle < -45 ? rectangle.width : rectangle.height
+    let oheight = rectangle.angle < -45 ? rectangle.height : rectangle.width
+    let ratio = owidth / oheight
+
+    let isSingle = ratio <= Constants.sizeConstants.singlePowerCubeRatio
+    let isDouble = ratio <= Constants.sizeConstants.doublePowerCubeRatio
+
+    if isSingle { return .singlePowerCube }
+    else if isDouble { return .doublePowerCube }
+    else { return .multiplePowerCubes }
   }
 
-  internal func calculateDistance (from rect: Rectangle) -> Double {
-    // TODO
-    return 0.0
+  internal static func getAzimuthAngle (for type: DetectedType, with centroid: DBugPoint) -> Double {
+    let fov = Constants.iphone7FOV, width = Double(UIScreen.main.bounds.width)
+    let ratio = self.getRatio(for: type)
+    let distance = width - centroid.x
+
+    return ratio != Double.nan
+      ? ((fov * distance)) / width
+      : Double.nan
+  }
+
+  internal static func getApproximateDistance (for type: DetectedType, from rectangle: DBugRect) -> Double {
+    let area = self.getRectArea(rectangle, for: type)
+    let pcArea = Constants.sizeConstants.powerCubeArea
+
+    return area != Double.nan
+      ? sqrt(pcArea / area)
+      : Double.nan
+  }
+
+  internal static func getRectArea (_ rectangle: DBugRect, for type: DetectedType) -> Double {
+    switch type {
+    case .singlePowerCube: return rectangle.width * rectangle.height
+    case .doublePowerCube: return (rectangle.width / 2) * rectangle.height
+    default: return Double.nan
+    }
+  }
+
+  internal static func getRatio (for type: DetectedType) -> Double {
+    switch type {
+    case .singlePowerCube: return 2.0
+    case .doublePowerCube: return 4.0
+    default: return Double.nan
+    }
   }
 }

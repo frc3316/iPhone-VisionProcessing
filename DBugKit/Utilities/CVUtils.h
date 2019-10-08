@@ -21,8 +21,8 @@ using RectInfoTuple = tuple<RotatedRect, cv::Rect>;
 
 // Matrix manipulations
 Mat sampleToMat (CMSampleBufferRef sample);
-Mat maskFrame (Mat frame, Scalar lowerBound, Scalar upperBound);
-Mat thresholdFrame (Mat maskedFrame, double thresh, bool hasFlash);
+void maskFrame (Mat *frame, Scalar lowerBound, Scalar upperBound);
+void thresholdFrame (Mat *input, double thresh, bool hasFlash);
 
 // Type handling
 Rectangle *rectFromCVRect (RotatedRect rotatedRect);

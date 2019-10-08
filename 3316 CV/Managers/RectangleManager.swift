@@ -10,28 +10,30 @@ import UIKit
 
 class RectangleManager {
   // Internal instance members
-  internal var rect: Rectangle?
+  internal var rect: DBugRect?
 
-  //! Sets the fill color for the shape layer
+  // Set the fill color for the shape layer
   var fillColor: UIColor = UIColor.clear
 
-  //! Sets the stroke color for the shape layer
+  // Set the stroke color for the shape layer
   var strokeColor: UIColor = UIColor.magenta
 
-  //! Sets the line join style for the shape layer
+  // Set the line join style for the shape layer
   var lineJoin: String = kCALineJoinMiter
 
-  //! Sets the line cap style for the shape layer
+  // Set the line cap style for the shape layer
   var lineCap: String = kCALineCapRound
 
-  //! Sets the frame of the shape layer
+  // Set the frame of the shape layer
   var frame: CGRect?
+
+  static let shared: RectangleManager = RectangleManager()
 
   /**
    * The RectangleManager constructor.
    * - parameter points: The initial points array of the rectangle.
    */
-  init (rect: Rectangle? = nil) {
+  init (rect: DBugRect? = nil) {
     self.rect = rect
   }
 
@@ -48,12 +50,12 @@ class RectangleManager {
     guard let rect = self.rect else { return shape }
 
     // Get CGPoints of DBugPoints
-    let topLeft = rect.topLeft
-    let topRight = rect.topRight
-    let bottomRight = rect.bottomRight
-    let bottomLeft = rect.bottomLeft
+    let topLeft = rect.topLeft.cgPoint()
+    let topRight = rect.topRight.cgPoint()
+    let bottomRight = rect.bottomRight.cgPoint()
+    let bottomLeft = rect.bottomLeft.cgPoint()
 
-    // Render the path on the layer
+    // If all good, continue to render the path on the layer
     let path = UIBezierPath()
     path.move(to: topLeft)
     path.addLine(to: topRight)
@@ -62,10 +64,10 @@ class RectangleManager {
     path.close()
     shape.path = path.cgPath
 
-    // Render the centeroid of the polygon
-    let center = rect.getCentroid()
-    let cl = self.getPointLayer(for: center, colored: UIColor.red)
-    shape.addSublayer(cl)
+    // Render the center point of the polygon
+    let center = rect.getCenteroid().cgPoint()
+    let centerLayer = self.getPointLayer(for: center, colored: UIColor.red)
+    shape.addSublayer(centerLayer)
 
     // Render the top left + bottom right in green
     let tlpl = self.getPointLayer(for: topLeft, colored: UIColor.green)
@@ -86,9 +88,8 @@ class RectangleManager {
    * Changes the internal state's points array to be a new one.
    * - parameter points: The new points array
    */
-  func emit (rect: Rectangle) {
-    rect.scale(withFactor: Constants.scaleFactor)
-    self.rect = rect
+  func emit (rect: DBugRect, in frame: CGRect) {
+    self.rect = rect.scalePoints(withFactor: Constants.scaleFactor)
   }
 
   // MARK: Internal functions
@@ -98,8 +99,8 @@ class RectangleManager {
    */
   internal func getPointLayer (for point: CGPoint, colored: UIColor) -> CALayer {
     let layer = CALayer()
-    let d = CGFloat(Constants.pointLayerWidth / 2)
-    let translation = CGAffineTransform(translationX: -d, y: -d)
+    let dist = CGFloat(Constants.pointLayerWidth / 2)
+    let translation = CGAffineTransform(translationX: -dist, y: -dist)
     let size = CGSize(width: Constants.pointLayerWidth, height: Constants.pointLayerWidth)
     layer.frame = CGRect(origin: point.applying(translation), size: size)
     layer.backgroundColor = colored.cgColor

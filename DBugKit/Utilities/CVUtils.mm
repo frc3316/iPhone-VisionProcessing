@@ -6,13 +6,13 @@
 //  Copyright © 2017 Jonathan Ohayon. All rights reserved.
 //
 
+#import "VisionConstants.h"
 #import "Utilities.h"
-#import <math.h>
 
-// The AVFoundation delegate for live camera feedback returns
+// Since iOS 11, the AVFoundation delegate for live camera feedback returns
 // a CMSampleBuffer instead of an actual image. OpenCV was not able to use
 // the image output of the buffer, so we're using the actual buffer data
-// in this method (which also works a bit faster)
+// in this method (which also works faster)
 Mat sampleToMat (CMSampleBufferRef sample) {
   CVImageBufferRef buf = CMSampleBufferGetImageBuffer(sample);
   CVPixelBufferLockBaseAddress(buf, 0);
@@ -22,47 +22,44 @@ Mat sampleToMat (CMSampleBufferRef sample) {
   size_t height = CVPixelBufferGetHeight(buf);
   unsigned char *address = (unsigned char*) CVPixelBufferGetBaseAddress(buf);
 
-  Mat mat = Mat((int) height, (int) width, CV_8UC4, address, bytesPerRow);
+  Mat mat((int) height, (int) width, CV_8UC4, address, bytesPerRow);
   CVPixelBufferUnlockBaseAddress(buf, 0);
+
   return mat;
 }
 
-Mat maskFrame (Mat frame, Scalar lowerBound, Scalar upperBound) {
-  Mat hsv, ranged;
-  cvtColor(frame, hsv, CV_BGR2HSV);
-  Scalar lb = lowerBound, ub = upperBound;
-  inRange(hsv, lb, ub, ranged);
-  return ranged;
+void maskFrame (Mat *frame, Scalar lowerBound, Scalar upperBound) {
+  cvtColor(*frame, *frame, CV_BGR2HSV);
+  inRange(*frame, lowerBound, upperBound, *frame);
 }
 
-Mat thresholdFrame (Mat maskedFrame, double thresh, bool hasFlash) {
-  Mat thresholded;
-  threshold(maskedFrame, thresholded, thresh, 255, CV_THRESH_BINARY);
-  erode(thresholded, thresholded, Mat());
+void thresholdFrame (Mat *frame, double thresh, bool hasFlash) {
+  threshold(*frame, *frame, thresh, 255, CV_THRESH_BINARY);
+  erode(*frame, *frame, Mat());
   // If the flash is turned on, we should erode the image another time to get rid of the small reflections
-  if (hasFlash) erode(thresholded, thresholded, Mat());
-  return thresholded;
+  if (hasFlash) erode(*frame, *frame, Mat());
 }
 
-CGPoint pointFromCVPoint (cv::Point point) { return CGPointMake(point.x, point.y); }
+DBugPoint *dbugPointFromPoint (Point2f point) { return [[DBugPoint alloc] initWithX: point.x y: point.y]; }
 
-Rectangle *rectFromCVRect (RotatedRect rotatedRect) {
-  Point2f vtx[4]; rotatedRect.points(vtx);
-  return [[Rectangle alloc] initWithTopLeft: pointFromCVPoint(vtx[1])
-                                   topRight: pointFromCVPoint(vtx[0])
-                                bottomRight: pointFromCVPoint(vtx[2])
-                                 bottomLeft: pointFromCVPoint(vtx[3])];
+DBugRect *rectFromPoints (Point2f tl, Point2f tr, Point2f br, Point2f bl) {
+  DBugPoint *tld = dbugPointFromPoint(tl);
+  DBugPoint *trd = dbugPointFromPoint(tr);
+  DBugPoint *brd = dbugPointFromPoint(br);
+  DBugPoint *bld = dbugPointFromPoint(bl);
+  return [[DBugRect alloc] initWithTopLeft: tld
+                                  topRight: trd
+                               bottomRight: brd
+                                bottomLeft: bld];
 }
 
-Rectangle *rectFromCVRect (cv::Rect boundingRectangle) {
-  CGPoint tld = pointFromCVPoint(boundingRectangle.tl());
-  CGPoint trd = [PointUtils transformPointA: tld dx: boundingRectangle.width dy: 0];
-  CGPoint brd = pointFromCVPoint(boundingRectangle.br());
-  CGPoint bld = [PointUtils transformPointA: brd dx: -boundingRectangle.width dy: 0];
-  return [[Rectangle alloc] initWithTopLeft: tld
-                                   topRight: trd
-                                bottomRight: brd
-                                 bottomLeft: bld];
+DBugRect *dbugRectFromRotated (RotatedRect rect) {
+  Point2f vtx[4]; rect.points(vtx);
+  DBugRect *dbugRect = rectFromPoints(vtx[0], vtx[1], vtx[2], vtx[3]);
+  dbugRect.width = rect.boundingRect2f().width;
+  dbugRect.height = rect.boundingRect2f().height;
+  dbugRect.angle = rect.angle;
+  return dbugRect;
 }
 
 bool shouldFilterContour (int numOfPoints, double area, double ratio, Polygon convex) {
@@ -75,8 +72,8 @@ bool shouldFilterContour (int numOfPoints, double area, double ratio, Polygon co
 }
 
 // Filter contours by polygon vertex count, area range and ratio range
-vector<RectInfoTuple> filterContours (PolygonArray contours) {
-  vector<RectInfoTuple> filtered;
+vector<RotatedRect> filterContours (PolygonArray contours) {
+  vector<RotatedRect> filtered;
   for_each(contours.begin(), contours.end(), [&filtered] (Polygon contour) {
     Polygon convex;
     convexHull(contour, convex);
@@ -85,31 +82,17 @@ vector<RectInfoTuple> filterContours (PolygonArray contours) {
                                             contourArea(convex) / 100.0, // Convex hull area
                                             rect.boundingRect2f().height / rect.boundingRect2f().width, // Bounding rectangle height-width ratio
                                             convex); // The convex hull itself
-    if (shouldFilter) {
-      RectInfoTuple tuple {rect, rect.boundingRect()};
-      filtered.push_back(tuple);
-    }
+//    if (shouldFilter)
+    filtered.push_back(rect);
   });
   return filtered;
 }
 
-Rectangle *minimalBoundingRectangle (RotatedRect rotatedRect, cv::Rect boundingRect) {
-  double height = boundingRect.height - (tan(rotatedRect.angle) * boundingRect.width);
-  double width = (rotatedRect.boundingRect2f().width / rotatedRect.boundingRect2f().height) * height;
-  Point2f center = rotatedRect.center;
-  Size2f size = Size2f(width, height);
-  float angle = rotatedRect.angle;
-  RotatedRect min = RotatedRect(center, size, angle);
-  return rectFromCVRect(min);
-}
-
-NSMutableArray<Rectangle *> *mapContours (vector<RectInfoTuple> rects) {
+NSMutableArray<DBugRect *> *mapContours (vector<RotatedRect> rects) {
   id transformed = [[NSMutableArray alloc] init];
-  for_each(rects.begin(), rects.end(), [&transformed] (RectInfoTuple tuple) {
-    RotatedRect rotatedRect = get<0>(tuple);
-    cv::Rect boundingRect = get<1>(tuple);
-    Rectangle *minimalBoundingRect = minimalBoundingRectangle(rotatedRect, boundingRect);
-    [transformed addObject: minimalBoundingRect];
+  for_each(rects.begin(), rects.end(), [&transformed] (RotatedRect rect) {
+    DBugRect *rectd = dbugRectFromRotated(rect);
+    [transformed addObject:rectd];
   });
   return transformed;
 }

@@ -8,18 +8,9 @@
 import AVFoundation
 import UIKit
 
-class RunViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, DeviceManagerDelegate {
+class RunViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
   override var shouldAutorotate: Bool { return false }
   override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .landscapeRight }
-
-  let cameraManager: CameraManager = CameraManager(type: .video, settings: Constants.camera)
-  let rectManager: RectangleManager = RectangleManager()
-  let sizeManager: SizeManager = SizeManager(measures: Constants.goalMeasures)
-  let deviceManager: DeviceManager = DeviceManager()
-  let networkManager: NetworkManager = NetworkManager(
-    teamNumber: Constants.teamNumber,
-    port: Constants.roborioPort
-  )
 
   // Color filter
   let colorFilter: ColorFilter = ColorFilter(
@@ -30,39 +21,20 @@ class RunViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferD
   let detector: Detector = Detector()
 
   @IBOutlet weak var preview: UIImageView!
-  @IBOutlet weak var polarLabel: UILabel!
-  @IBOutlet weak var azimuthLabel: UILabel!
-  @IBOutlet weak var batteryLabel: UILabel!
-  @IBOutlet weak var flashSwitch: UISwitch!
-
-  @IBAction func flashSwitchChanged (_ sender: UISwitch) {
-    try? self.cameraManager.setFlash(sender.isOn)
-  }
-
-  @IBAction func back(_ sender: Any) {
-    _ = navigationController?.popToRootViewController(animated: true)
-  }
+  @IBOutlet weak var dataLabel: UILabel!
 
   override func viewDidLoad () {
     super.viewDidLoad()
 
-    self.deviceManager.delegate = self
-    self.flashSwitch.setOn(Constants.camera.flash, animated: true)
-    self.cameraManager.run(on: self.view, with: self)
-    self.networkManager.prepare()
+    CameraManager.sharedVideo.run(on: self.view, with: self)
 
     let frame = self.view.frame
-    self.rectManager.frame = frame
-    self.view.layer.addSublayer(self.rectManager.render(in: frame))
+    RectangleManager.shared.frame = frame
+    self.view.layer.addSublayer(RectangleManager.shared.render(in: frame))
   }
 
   override func didReceiveMemoryWarning () {
     super.didReceiveMemoryWarning()
-  }
-
-  func batteryLevelChanged (with level: Int) {
-    let txt = level < 0 ? "Charging" : "\(level)%"
-    self.batteryLabel.text = "Battery: \(txt)"
   }
 
   func captureOutput(_ output: AVCaptureOutput,
@@ -70,8 +42,9 @@ class RunViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferD
                      from connection: AVCaptureConnection) {
     // 1. Draw the masked colors image to the screen
     let masked = self.colorFilter.filterColors(of: sampleBuffer, isFlashOn: Constants.camera.flash)
+    let regularImage = self.colorFilter.image(from: sampleBuffer)
     DispatchQueue.main.async {
-      self.preview.image = masked
+      self.preview.image = regularImage
       self.preview.layer.sublayers?.removeAll()
     }
 
@@ -79,23 +52,19 @@ class RunViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferD
     let boundingRects = self.detector.getBoundingRects(in: masked!) ?? []
     guard boundingRects.count > 0 else { Log.d("No rects found"); return }
 
-    // 3. Send it to the roboRIO
-//    let centroid = self.sizeManager.distanceFrom(rect: boundingRects[0])
-//    self.networkManager.sendCentroid(with: centroid)
+    // 3. Calculate the data using the rectangle
+    let data = SizeManager.calculateData(from: boundingRects[0])
 
-    // 4. Draw it to the screen
+    // 4. Draw everything to the screen
     DispatchQueue.main.async {
       let frame = self.preview.frame
 
-      // Get the distance and the angle from the rectangle
-      let centroid = self.sizeManager.distanceFrom(rect: boundingRects[0])
-      self.polarLabel.text = "Polar: \(centroid.polar)"
-      self.azimuthLabel.text = "Azimuth: \(centroid.azimuth)"
-
       // The first rectangle is the best match to our criteria
-      self.rectManager.emit(rect: boundingRects[0])
-      let layer = self.rectManager.render(in: frame)
+      RectangleManager.shared.emit(rect: boundingRects[0], in: frame)
+      let layer = RectangleManager.shared.render(in: frame)
       self.preview.layer.addSublayer(layer)
+
+      self.dataLabel.text = "Azimuth: \(data.0), Distance: \(data.1)"
     }
   }
 }

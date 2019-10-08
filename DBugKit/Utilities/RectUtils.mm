@@ -50,7 +50,7 @@
 }
 
 - (CGPoint) CGPoint {
-  // yuck c structs
+  // yay c structs!
   CGPoint p;
   p.x = self.x;
   p.y = self.y;

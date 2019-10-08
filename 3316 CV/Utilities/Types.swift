@@ -9,10 +9,7 @@
 import UIKit
 
 //! Camera exposure tuple
-typealias Exposure = (
-  duration: Int32,
-  iso: Float
-)
+typealias Exposure = Int32
 
 //! Camera settings tuple
 typealias CameraSettings = (
@@ -28,7 +25,9 @@ typealias Centroid = (
   isDetected: Bool
 )
 
-typealias Measures = (
-  width: Double,
-  height: Double
+//! Size manager configuration
+typealias Sizes = (
+  powerCubeArea: Double,
+  singlePowerCubeRatio: Double,
+  doublePowerCubeRatio: Double
 )

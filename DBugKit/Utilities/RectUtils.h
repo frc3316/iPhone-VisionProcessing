@@ -12,8 +12,8 @@
 // Point class
 @interface DBugPoint : NSObject
 
-@property (assign) double x;
-@property (assign) double y;
+@property (nonatomic) double x;
+@property (nonatomic) double y;
 
 - (id) initWithX: (double) x
                y: (double) y;
@@ -21,8 +21,6 @@
                   deltaY: (double) dy;
 - (DBugPoint *) scaledWithX: (double) dx
                           y: (double) dy;
-- (DBugPoint *) transformedWithX: (double) dx
-                               y: (double) dy;
 - (double) distanceFromPoint: (DBugPoint *) point;
 - (DBugPoint *) centerWithPointB: (DBugPoint *) point;
 
@@ -33,10 +31,13 @@
 // Rectangle (polygon w/4 points) class
 @interface DBugRect : NSObject
 
-@property (assign) DBugPoint *topLeft;
-@property (assign) DBugPoint *topRight;
-@property (assign) DBugPoint *bottomRight;
-@property (assign) DBugPoint *bottomLeft;
+@property (nonatomic) DBugPoint *topLeft;
+@property (nonatomic) DBugPoint *topRight;
+@property (nonatomic) DBugPoint *bottomRight;
+@property (nonatomic) DBugPoint *bottomLeft;
+@property (nonatomic) double width;
+@property (nonatomic) double height;
+@property (nonatomic) double angle;
 
 - (id) initWithTopLeft: (DBugPoint *) tl
               topRight: (DBugPoint *) tr
@@ -45,17 +46,6 @@
 - (NSArray<DBugPoint *> *) getPointsArray;
 - (DBugPoint *) getCenteroid;
 - (DBugRect *) scalePointsWithFactor: (double) scaleFactor;
-- (double) getWidth;
-- (double) getHeight;
 - (CGRect) CGRect;
-
-@end
-
-@interface RectVector : NSObject
-
-@property (assign) DBugRect *rect1;
-@property (assign) DBugRect *rect2;
-
-- (id) initWithRect1: (DBugRect *) rect1 rect2: (DBugRect *) rect2;
 
 @end
