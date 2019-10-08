@@ -28,9 +28,9 @@ class RunViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferD
 
     CameraManager.sharedVideo.run(on: self.view, with: self)
 
-    let frame = self.view.frame
+    let frame = self.preview.bounds
     RectangleManager.shared.frame = frame
-    self.view.layer.addSublayer(RectangleManager.shared.render(in: frame))
+    self.preview.layer.addSublayer(RectangleManager.shared.render(in: frame))
   }
 
   override func didReceiveMemoryWarning () {
@@ -42,9 +42,8 @@ class RunViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferD
                      from connection: AVCaptureConnection) {
     // 1. Draw the masked colors image to the screen
     let masked = self.colorFilter.filterColors(of: sampleBuffer, isFlashOn: Constants.camera.flash)
-    let regularImage = self.colorFilter.image(from: sampleBuffer)
     DispatchQueue.main.async {
-      self.preview.image = regularImage
+      self.preview.image = masked
       self.preview.layer.sublayers?.removeAll()
     }
 
@@ -57,7 +56,7 @@ class RunViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferD
 
     // 4. Draw everything to the screen
     DispatchQueue.main.async {
-      let frame = self.preview.frame
+      let frame = self.preview.bounds
 
       // The first rectangle is the best match to our criteria
       RectangleManager.shared.emit(rect: boundingRects[0], in: frame)

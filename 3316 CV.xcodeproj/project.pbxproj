@@ -83,7 +83,6 @@
 		A58D8F431F50BCBE00758EC5 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		A58D8F451F50C12A00758EC5 /* 3316 CV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "3316 CV-Bridging-Header.h"; sourceTree = "<group>"; };
 		A5A2CA211F72A33500CF5E0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		A5B147471F6FD7A200BEF6A2 /* VisionConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisionConstants.h; sourceTree = "<group>"; };
 		A5B147491F6FD7F400BEF6A2 /* Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		A5F541F31F575D6F008B2754 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E731B96F49027F2D7F12CF48 /* Pods_3316_CV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3316_CV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,7 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				A5B147491F6FD7F400BEF6A2 /* Utilities.h */,
-				A5B147471F6FD7A200BEF6A2 /* VisionConstants.h */,
 				A58988BC1F6B1E4C004CB616 /* ColorUtils.h */,
 				A58988BD1F6B1E4C004CB616 /* ColorUtils.mm */,
 				A58988BE1F6B1E4C004CB616 /* CVUtils.h */,

@@ -9,7 +9,7 @@
 #import <opencv2/opencv.hpp>
 #import <AVFoundation/AVFoundation.h>
 #import <stdio.h>
-#import "NewRectUtils.h"
+#import "RectUtils.h"
 
 using namespace cv;
 using namespace std;
@@ -25,9 +25,9 @@ void maskFrame (Mat *frame, Scalar lowerBound, Scalar upperBound);
 void thresholdFrame (Mat *input, double thresh, bool hasFlash);
 
 // Type handling
-Rectangle *rectFromCVRect (RotatedRect rotatedRect);
-Rectangle *rectFromCVRect (cv::Rect boundingRectangle);
+DBugRect *rectFromCVRect (RotatedRect rotatedRect);
+DBugRect *rectFromCVRect (cv::Rect boundingRectangle);
 
 // Contours
 vector<RectInfoTuple> filterContours (PolygonArray contours);
-NSMutableArray<Rectangle *> *mapContours (vector<RectInfoTuple> rects);
+NSMutableArray<DBugRect *> *mapContours (vector<RectInfoTuple> rects);

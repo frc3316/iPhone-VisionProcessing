@@ -58,7 +58,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.61176470588235299" blue="0.0078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="HTO-Pf-9Tj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="03T-mZ-8Ro"/>
@@ -90,10 +90,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8DK-7B-gQE">
-                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O9x-wu-6D1">
                                 <rect key="frame" x="0.0" y="333" width="896" height="60"/>
                                 <subviews>
@@ -105,22 +101,28 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="MMz-tk-gG4"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8DK-7B-gQE">
+                                <rect key="frame" x="152" y="0.0" width="592" height="333"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="8DK-7B-gQE" secondAttribute="height" multiplier="16:9" id="OsO-zS-faK"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="8DK-7B-gQE" firstAttribute="leading" secondItem="eJi-eJ-xvO" secondAttribute="leading" id="14a-48-wVE"/>
+                            <constraint firstItem="O9x-wu-6D1" firstAttribute="top" secondItem="8DK-7B-gQE" secondAttribute="bottom" id="C3z-Le-N1s"/>
                             <constraint firstItem="O9x-wu-6D1" firstAttribute="leading" secondItem="eJi-eJ-xvO" secondAttribute="leading" id="FeI-cC-OZJ"/>
                             <constraint firstAttribute="trailing" secondItem="O9x-wu-6D1" secondAttribute="trailing" id="IGx-LU-yLA"/>
-                            <constraint firstAttribute="bottom" secondItem="8DK-7B-gQE" secondAttribute="bottom" id="IIk-eW-od2"/>
                             <constraint firstItem="8DK-7B-gQE" firstAttribute="top" secondItem="eJi-eJ-xvO" secondAttribute="top" id="Je7-Ci-lIb"/>
                             <constraint firstItem="8DK-7B-gQE" firstAttribute="top" secondItem="Gfd-Cq-Pn6" secondAttribute="top" id="SIG-9X-7wz"/>
+                            <constraint firstItem="8DK-7B-gQE" firstAttribute="centerX" secondItem="eJi-eJ-xvO" secondAttribute="centerX" id="UHN-Wt-sv3"/>
                             <constraint firstItem="O9x-wu-6D1" firstAttribute="bottom" secondItem="Gfd-Cq-Pn6" secondAttribute="bottom" id="aEY-p2-vtf"/>
-                            <constraint firstAttribute="trailing" secondItem="8DK-7B-gQE" secondAttribute="trailing" id="el8-fF-bCw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Gfd-Cq-Pn6"/>
                     </view>
@@ -293,6 +295,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="qBf-Jm-ZOI"/>
                     <connections>
+                        <outlet property="maxHSlider" destination="naI-jT-g3H" id="3z2-SM-neL"/>
+                        <outlet property="maxSSlider" destination="Esy-4i-Sfp" id="sfT-bO-v2m"/>
+                        <outlet property="maxVSlider" destination="j8d-d0-XxI" id="AJi-cP-f2B"/>
+                        <outlet property="minHSlider" destination="9eu-rS-SHr" id="DgD-sS-yTA"/>
+                        <outlet property="minSSlider" destination="qB3-3i-zP5" id="ils-55-ZuL"/>
+                        <outlet property="minVSlider" destination="tR5-h6-nuL" id="Fgi-BO-AX3"/>
                         <outlet property="preview" destination="YUn-hY-eHi" id="sap-Xq-TAt"/>
                     </connections>
                 </viewController>

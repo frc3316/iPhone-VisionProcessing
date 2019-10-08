@@ -113,15 +113,3 @@
 }
 
 @end
-
-@implementation RectVector
-
-- (id) initWithRect1: (DBugRect *) rect1 rect2: (DBugRect *) rect2 {
-  if (self = [super init]) {
-    self.rect1 = rect1;
-    self.rect2 = rect2;
-  }
-  return self;
-}
-
-@end

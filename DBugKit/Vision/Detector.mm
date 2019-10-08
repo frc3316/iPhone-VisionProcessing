@@ -14,7 +14,7 @@
 
 @implementation Detector
 
-- (NSMutableArray<Rectangle *> *) getBoundingRectsInImage: (UIImage *) image {
+- (NSMutableArray<DBugRect *> *) getBoundingRectsInImage: (UIImage *) image {
   Mat mat;
   UIImageToMat(image, mat);
   PolygonArray contours;

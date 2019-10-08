@@ -11,7 +11,7 @@ import Foundation
 //! Constant global values
 struct Constants {
   // Color filter configurations
-  static let lowerColorBound = DBugColor(hue: 20, saturation: 100, value: 100)
+  static let lowerColorBound = DBugColor(hue: 20, saturation: 120, value: 100)
   static let upperColorBound = DBugColor(hue: 80, saturation: 255, value: 255)
 
   // Camera settings

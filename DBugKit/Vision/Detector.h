@@ -12,10 +12,10 @@
 #import <UIKit/UIKit.h>
 
 #import "../Color/ColorFilter.h" // ColorFilter def
-#import "../Utilities/NewRectUtils.h" // Rectangle utilities
+#import "../Utilities/RectUtils.h" // Rectangle utilities
 
 @interface Detector : NSObject
 
-- (NSArray<Rectangle *> *) getBoundingRectsInImage: (UIImage *) image;
+- (NSArray<DBugRect *> *) getBoundingRectsInImage: (UIImage *) image;
 
 @end

@@ -21,29 +21,43 @@ class CalibrateViewController: UIViewController, AVCaptureVideoDataOutputSampleB
 
   @IBOutlet weak var preview: UIImageView!
 
+  @IBOutlet weak var minHSlider: UISlider!
+  @IBOutlet weak var minSSlider: UISlider!
+  @IBOutlet weak var minVSlider: UISlider!
+
+  @IBOutlet weak var maxHSlider: UISlider!
+  @IBOutlet weak var maxSSlider: UISlider!
+  @IBOutlet weak var maxVSlider: UISlider!
+
   @IBAction func onSliderChange(_ slider: UISlider) {
-    guard let sliderId = slider.restorationIdentifier else { return }
-    print("Slider value: \(slider.value); Restoration ID: \(sliderId)")
-    switch sliderId {
-    case "minh": Constants.lowerColorBound?.h = Double(slider.value)
-    case "mins": Constants.lowerColorBound?.s = Double(slider.value)
-    case "minv": Constants.lowerColorBound?.v = Double(slider.value)
-    case "maxh": Constants.upperColorBound?.h = Double(slider.value)
-    case "maxs": Constants.upperColorBound?.s = Double(slider.value)
-    case "maxv": Constants.upperColorBound?.v = Double(slider.value)
-    default:
-      return
-    }
+    print("\(slider.restorationIdentifier) value: \(slider.value)")
+    self.updateConfig()
   }
 
   @IBAction func onMaskChange(_ sender: UISwitch) {
     self.shouldDisplayMaskedOutput = sender.isOn
   }
 
+  func updateConfig() {
+    Constants.lowerColorBound?.h = Double(minHSlider.value)
+    Constants.lowerColorBound?.s = Double(minSSlider.value)
+    Constants.lowerColorBound?.v = Double(minVSlider.value)
+    Constants.upperColorBound?.h = Double(maxHSlider.value)
+    Constants.upperColorBound?.s = Double(maxSSlider.value)
+    Constants.upperColorBound?.v = Double(maxVSlider.value)
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
     CameraManager.sharedVideo.run(on: self.view, with: self)
+
+    minHSlider.value = Float(Constants.lowerColorBound?.h ?? 0)
+    minSSlider.value = Float(Constants.lowerColorBound?.s ?? 0)
+    minVSlider.value = Float(Constants.lowerColorBound?.v ?? 0)
+    maxHSlider.value = Float(Constants.upperColorBound?.h ?? 0)
+    maxSSlider.value = Float(Constants.upperColorBound?.s ?? 0)
+    maxVSlider.value = Float(Constants.upperColorBound?.v ?? 0)
   }
 
   func captureOutput(_ output: AVCaptureOutput,
